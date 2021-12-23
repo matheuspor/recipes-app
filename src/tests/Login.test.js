@@ -9,7 +9,10 @@ const datatestIds = {
   passwordInput: 'password-input',
   loginBtn: 'login-submit-btn',
 };
-
+const mocks = {
+  email: 'test@email.com',
+  password: '123456',
+};
 test('Renders login page', () => {
   render(
     <BrowserRouter>
@@ -38,8 +41,8 @@ test('Test enter button', () => {
   const loginBtn = screen.getByTestId(datatestIds.loginBtn);
 
   expect(loginBtn).toBeDisabled();
-  userEvent.type(emailInput, 'test@email.com');
-  userEvent.type(passwordInput, '123456');
+  userEvent.type(emailInput, mocks.email);
+  userEvent.type(passwordInput, mocks.password);
 
   expect(loginBtn).toBeEnabled();
 });
@@ -54,7 +57,7 @@ test('Check if local storage set tokens', async () => {
     expect(localStorage.getItem('cocktailsToken')).toBeTruthy();
   });
 });
-test('Check if local storage set email and redirects', () => {
+test('Check if local storage set email', () => {
   render(
     <BrowserRouter>
       <Login />
@@ -63,12 +66,11 @@ test('Check if local storage set email and redirects', () => {
   const emailInput = screen.getByTestId(datatestIds.emailInput);
   const passwordInput = screen.getByTestId(datatestIds.passwordInput);
   const loginBtn = screen.getByTestId(datatestIds.loginBtn);
-  const mockEmail = 'test@email.com';
 
-  userEvent.type(emailInput, mockEmail);
-  userEvent.type(passwordInput, '123456');
+  userEvent.type(emailInput, mocks.email);
+  userEvent.type(passwordInput, mocks.password);
   userEvent.click(loginBtn);
 
   const email = JSON.parse(localStorage.getItem('user'));
-  expect(email).toStrictEqual({ email: mockEmail });
+  expect(email).toStrictEqual({ email: mocks.email });
 });
