@@ -1,7 +1,7 @@
-/* eslint-disable react/prop-types */
 import { Button, Container, Stack, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Header from '../../components/Header';
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -24,7 +24,6 @@ export default function Login() {
     e.preventDefault();
     localStorage.setItem('user', JSON.stringify({ email }));
     navigate('/recipes-app/meals');
-    console.log(location);
   };
   return (
     <Container
@@ -32,6 +31,7 @@ export default function Login() {
       maxWidth="xs"
       sx={ { my: 4 } }
     >
+      <Header location={ location.pathname } />
       <Stack
         component="form"
         spacing={ 3 }
