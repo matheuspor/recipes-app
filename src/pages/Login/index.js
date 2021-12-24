@@ -1,7 +1,6 @@
 import { Button, Container, Stack, TextField, Typography } from '@mui/material';
 import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import Header from '../../components/Header';
+import { useNavigate } from 'react-router-dom';
 
 const MIN_PASSWORD_LENGTH = 6;
 
@@ -9,7 +8,6 @@ export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [formCheck, setFormCheck] = useState(true);
-  const location = useLocation();
   const navigate = useNavigate();
   useEffect(() => {
     if (email && (password.length >= MIN_PASSWORD_LENGTH)) {
@@ -31,7 +29,6 @@ export default function Login() {
       maxWidth="xs"
       sx={ { my: 4 } }
     >
-      <Header location={ location.pathname } />
       <Stack
         component="form"
         spacing={ 3 }
