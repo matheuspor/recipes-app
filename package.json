@@ -48,6 +48,8 @@
     "eslint": "^7.32.0",
     "eslint-config-trybe-frontend": "^1.2.2",
     "gh-pages": "^3.2.3",
+    "react-query": "^3.34.6",
+    "react-query-devtools": "^2.6.3",
     "react-router-dom": "^6.1.1"
   }
 }
