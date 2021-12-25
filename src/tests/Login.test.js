@@ -57,7 +57,7 @@ test('Check if local storage set tokens', async () => {
     expect(localStorage.getItem('cocktailsToken')).toBeTruthy();
   });
 });
-test('Check if local storage set email', () => {
+test('Check if button sets local storage and redirects page', async () => {
   render(
     <BrowserRouter>
       <Login />
@@ -73,4 +73,5 @@ test('Check if local storage set email', () => {
 
   const email = JSON.parse(localStorage.getItem('user'));
   expect(email).toStrictEqual({ email: mocks.email });
+  screen.findByText('Meals');
 });
