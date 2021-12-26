@@ -19,8 +19,15 @@ export default function Meals() {
     >
       <Header />
       <Grid container spacing={ { xs: 2, md: 3 } } columns={ { xs: 4, sm: 8, md: 12 } }>
-        {meals.map((meal) => (
-          <Grid item xs={ 2 } sm={ 4 } md={ 4 } key={ meal.idMeal }>
+        {meals.map((meal, index) => (
+          <Grid
+            data-testid={ `${index}-recipe-card` }
+            item
+            xs={ 2 }
+            sm={ 4 }
+            md={ 4 }
+            key={ meal.idMeal }
+          >
             <MealCard meal={ meal } />
           </Grid>
         ))}
