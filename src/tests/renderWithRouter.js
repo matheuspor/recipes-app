@@ -3,9 +3,9 @@ import React from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { BrowserRouter } from 'react-router-dom';
 
-const renderWithRouter = (ui, { route = '/' } = {}) => {
+const renderWithRouter = (ui, { route = '/recipes-app' } = {}) => {
   const client = new QueryClient();
-  window.history.pushState({}, 'Test page', route);
+  window.history.replaceState({}, '', route);
 
   return render(
     <QueryClientProvider client={ client }>

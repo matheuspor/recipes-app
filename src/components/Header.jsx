@@ -19,10 +19,10 @@ export default function Header() {
             size="large"
             edge="start"
             color="inherit"
-            onClick={ () => navigate('/recipes-app/profile') }
+            onClick={ () => navigate('recipes-app/profile') }
+            data-testid="profile-top-btn"
           >
             <AccountCircle
-              data-testid="profile-top-btn"
               sx={ { width: 30, height: 30 } }
             />
           </IconButton>
