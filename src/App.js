@@ -2,13 +2,14 @@ import './App.css';
 import { Route, Routes } from 'react-router-dom';
 import React from 'react';
 import Login from './pages/Login';
-import Meals from './pages/Meals';
+import Recipes from './pages/Recipes';
 
 function App() {
   return (
     <Routes>
       <Route path="/recipes-app" element={ <Login /> } />
-      <Route path="/recipes-app/meals" element={ <Meals /> } />
+      <Route path="/recipes-app/foods" element={ <Recipes /> } />
+      <Route path="/recipes-app/drinks" element={ <Recipes /> } />
       <Route
         path="/recipes-app/profile"
         element={

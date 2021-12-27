@@ -60,5 +60,5 @@ test('Check if button sets local storage and redirects page', async () => {
 
   const email = JSON.parse(localStorage.getItem('user'));
   expect(email).toStrictEqual({ email: mocks.email });
-  expect(window.location.pathname).toStrictEqual('/recipes-app/meals');
+  expect(window.location.pathname).toStrictEqual('/recipes-app/foods');
 });

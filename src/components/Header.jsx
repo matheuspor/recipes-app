@@ -1,10 +1,12 @@
 import { AccountCircle, Search } from '@mui/icons-material';
 import { AppBar, IconButton,
   Toolbar, Typography } from '@mui/material';
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import BasicPopover from './Popover';
 
 export default function Header() {
+  const [openPopover, setOpenPopover] = useState(false);
   const { pathname } = useLocation();
   const treatedLocation = pathname.split('/')[2];
   const navigate = useNavigate();
@@ -14,6 +16,10 @@ export default function Header() {
         position="fixed"
         color="primary"
       >
+        <BasicPopover
+          closePopover={ () => setOpenPopover(!openPopover) }
+          openPopover={ openPopover }
+        />
         <Toolbar sx={ { justifyContent: 'center' } }>
           <IconButton
             size="large"
@@ -38,6 +44,7 @@ export default function Header() {
             size="large"
             color="inherit"
             data-testid="search-top-btn"
+            onClick={ () => setOpenPopover(!openPopover) }
           >
             <Search sx={ { width: 30, height: 30 } } />
           </IconButton>
