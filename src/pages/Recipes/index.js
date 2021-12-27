@@ -1,0 +1,37 @@
+import { Container, Grid } from '@mui/material';
+import React from 'react';
+import Header from '../../components/Header';
+import useGetRecipes from '../../hooks/useGetRecipes';
+import RecipeCard from './RecipeCard';
+
+export default function Recipes() {
+  const { isLoading, meals } = useGetRecipes();
+  if (isLoading) {
+    return (
+      <h1>Loading...</h1>
+    );
+  }
+  return (
+    <Container
+      component="main"
+      maxWidth="xs"
+      sx={ { my: 4, textAlign: 'center' } }
+    >
+      <Header />
+      <Grid container spacing={ { xs: 2, md: 3 } } columns={ { xs: 4, sm: 8, md: 12 } }>
+        {meals && meals.map((meal, index) => (
+          <Grid
+            data-testid={ `${index}-recipe-card` }
+            item
+            xs={ 2 }
+            sm={ 4 }
+            md={ 4 }
+            key={ meal.idMeal }
+          >
+            <RecipeCard meal={ meal } />
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
+  );
+}
