@@ -1,8 +1,10 @@
 const MEALS_NUMBER = 12;
-const FOODS_API_URL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
-const DRINKS_API_URL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
-const FOODS_CATEGORIES = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
-const DRINKS_CATEGORIES = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
+const FOODS_BY_NAME = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+const DRINKS_BY_NAME = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
+const FOODS_BY_INGREDIENT = 'https://www.themealdb.com/api/json/v1/1/filter.php?i=';
+const DRINKS_BY_INGREDIENT = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
+const FOODS_BY_CATEGORIES = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
+const DRINKS_BY_CATEGORIES = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
 const location = window.location.pathname;
 
 export const fetcher = (url) => fetch(url)
@@ -14,12 +16,18 @@ export const fetcher = (url) => fetch(url)
     return null;
   });
 
-export const fetchMealsByName = (name = '') => (
-  location.endsWith('/foods')
-    ? fetcher(`${FOODS_API_URL}${name}`)
-    : fetcher(`${DRINKS_API_URL}${name}`));
-
 export const fetchMealsByCategories = (name = '') => (
   location.endsWith('/foods')
-    ? fetcher(`${FOODS_CATEGORIES}${name}`)
-    : fetcher(`${DRINKS_CATEGORIES}${name}`));
+    ? fetcher(`${FOODS_BY_CATEGORIES}${name}`)
+    : fetcher(`${DRINKS_BY_CATEGORIES}${name}`));
+
+export const searchAndFetchMeals = (name = '', category = '') => {
+  if (category !== 'Name') {
+    return location.endsWith('/foods')
+      ? fetcher(`${FOODS_BY_INGREDIENT}${name}`)
+      : fetcher(`${DRINKS_BY_INGREDIENT}${name}`);
+  }
+  return location.endsWith('/foods')
+    ? fetcher(`${FOODS_BY_NAME}${name}`)
+    : fetcher(`${DRINKS_BY_NAME}${name}`);
+};

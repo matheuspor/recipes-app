@@ -1,40 +1,55 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { Button, Menu, MenuItem, TextField } from '@mui/material';
+import { Button, FormControlLabel, Menu,
+  MenuItem, Radio, RadioGroup, TextField } from '@mui/material';
 import client from '../services/reactQueryClient';
-import { fetchMealsByName } from '../services/apiHelpers';
+import { searchAndFetchMeals } from '../services/apiHelpers';
 
 export default function BasicPopover({ openPopover, closePopover }) {
   const [name, setName] = useState('');
+  const [category, setCategory] = useState('Name');
   return (
-    <div>
-      <Menu
-        open={ openPopover }
-        onClose={ closePopover }
-        anchorOrigin={ {
-          horizontal: 'center',
-        } }
-        sx={ { mt: 3 } }
-      >
-        <MenuItem sx={ { p: 2 } }>
-          <TextField
-            inputRef={ (input) => input && input.focus() }
-            type="text"
-            label="Search Recipe"
-            variant="filled"
-            onChange={ ({ target }) => setName(target.value) }
-          />
-          <Button
-            onClick={ async () => {
-              const meals = await fetchMealsByName(name);
-              client.setQueryData('meals', meals);
-            } }
-          >
-            Search
-          </Button>
-        </MenuItem>
-      </Menu>
-    </div>
+    <Menu
+      component="form"
+      onSubmit={ async (event) => {
+        event.preventDefault();
+        const meals = await searchAndFetchMeals(name, category);
+        client.setQueryData('meals', meals);
+      } }
+      open={ openPopover }
+      onClose={ closePopover }
+      anchorOrigin={ {
+        horizontal: 'center',
+      } }
+      sx={ { mt: 3 } }
+    >
+      <MenuItem sx={ { p: 2 } }>
+        <TextField
+          inputRef={ (input) => input && input.focus() }
+          type="text"
+          label="Search Recipe"
+          variant="filled"
+          onChange={ ({ target }) => setName(target.value) }
+        />
+        <Button
+          color="primary"
+          sx={ { ml: 2 } }
+          type="submit"
+        >
+          Search
+        </Button>
+      </MenuItem>
+      <MenuItem sx={ { p: 2 } }>
+        <RadioGroup
+          row
+          defaultValue="Name"
+          onChange={ ({ target: { value } }) => setCategory(value) }
+        >
+          <FormControlLabel value="Name" control={ <Radio /> } label="Name" />
+          <FormControlLabel value="Ingredient" control={ <Radio /> } label="Ingredient" />
+        </RadioGroup>
+      </MenuItem>
+    </Menu>
   );
 }
 
