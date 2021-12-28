@@ -15,7 +15,7 @@ const DetailsPage = () => {
       maxWidth="xs"
       sx={ { my: 4 } }
     >
-      <Card sx={ { maxWidth: 600 } }>
+      <Card sx={ { maxWidth: 600 } } spacing={ 2 }>
         <CardActionArea>
           <CardMedia
             component="img"
@@ -30,7 +30,7 @@ const DetailsPage = () => {
             <Typography sx={ { mb: 1.5 } } variant="body2" color="text.secondary">
               {meal.strCategory}
             </Typography>
-            <Typography variant="h6">
+            <Typography variant="h6" sx={ { mb: 0.5 } }>
               Ingredients
             </Typography>
             <Paper elevation={ 6 } sx={ { backgroundColor: '#fafafa' } }>

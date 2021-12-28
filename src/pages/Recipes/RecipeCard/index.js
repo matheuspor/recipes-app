@@ -7,7 +7,6 @@ const RecipeCard = ({ meal }) => {
   const navigate = useNavigate();
   return (
     <Card sx={ { mt: 2 } }>
-      {console.log(meal)}
       <CardActionArea
         onClick={ () => navigate(`/recipes-app/foods/${meal.idMeal}`, { state: meal }) }
       >
