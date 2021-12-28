@@ -1,7 +1,6 @@
 import { Button, Grid } from '@mui/material';
 import React from 'react';
-import { fetchMealsByCategories,
-  searchAndFetchMeals } from '../../../services/apiHelpers';
+import { fetchAllMeals, fetchMealsByCategories } from '../../../services/apiHelpers';
 import client from '../../../services/reactQueryClient';
 
 const FilterButtons = () => {
@@ -21,7 +20,7 @@ const FilterButtons = () => {
       const meals = await fetchMealsByCategories(value);
       client.setQueryData('meals', meals);
     } else {
-      const allMeals = await searchAndFetchMeals();
+      const allMeals = await fetchAllMeals();
       client.setQueryData('meals', allMeals);
     }
   };

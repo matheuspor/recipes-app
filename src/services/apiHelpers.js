@@ -31,3 +31,10 @@ export const searchAndFetchMeals = (name = '', category = '') => {
     ? fetcher(`${FOODS_BY_NAME}${name}`)
     : fetcher(`${DRINKS_BY_NAME}${name}`);
 };
+
+export const fetchAllMeals = () => {
+  if (location.endsWith('/foods')) {
+    return fetcher(FOODS_BY_NAME);
+  }
+  return fetcher(DRINKS_BY_NAME);
+};
