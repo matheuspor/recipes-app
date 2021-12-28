@@ -1,7 +1,8 @@
-import { Container, Grid } from '@mui/material';
+import { Container, Grid, Typography } from '@mui/material';
 import React from 'react';
 import Header from '../../components/Header';
 import useGetRecipes from '../../hooks/useGetRecipes';
+import FilterButtons from './FilterButtons';
 import RecipeCard from './RecipeCard';
 
 export default function Recipes() {
@@ -15,11 +16,18 @@ export default function Recipes() {
     <Container
       component="main"
       maxWidth="xs"
-      sx={ { my: 4, textAlign: 'center' } }
+      sx={ { my: 2 } }
     >
       <Header />
-      <Grid container spacing={ { xs: 2, md: 3 } } columns={ { xs: 4, sm: 8, md: 12 } }>
-        {meals && meals.map((meal, index) => (
+      <FilterButtons />
+      <Grid
+        container
+        spacing={ { xs: 2, md: 3 } }
+        columns={ { xs: 4, sm: 8, md: 12 } }
+        sx={ { justifyContent: 'center',
+        } }
+      >
+        {meals ? meals.map((meal, index) => (
           <Grid
             data-testid={ `${index}-recipe-card` }
             item
@@ -30,7 +38,14 @@ export default function Recipes() {
           >
             <RecipeCard meal={ meal } />
           </Grid>
-        ))}
+        )) : (
+          <Typography
+            variant="h6"
+            sx={ { mt: 4 } }
+          >
+            No recipes found...
+          </Typography>
+        )}
       </Grid>
     </Container>
   );
