@@ -3,13 +3,14 @@ import React from 'react';
 import { fetchAllMeals, fetchMealsByCategories } from '../../../services/apiHelpers';
 import client from '../../../services/reactQueryClient';
 
+const foodsCategories = ['All', 'Beef', 'Lamb', 'Chicken', 'Breakfast', 'Dessert'];
+const drinksCategories = ['All', 'Beer', 'Cocktail', 'Cocoa', 'Shot', 'Other/Unknown'];
+
 const FilterButtons = () => {
   const location = window.location.pathname;
   const [categories, setCategories] = React.useState([]);
+
   React.useEffect(() => {
-    const foodsCategories = ['All', 'Beef', 'Lamb', 'Chicken', 'Breakfast', 'Dessert'];
-    const drinksCategories = ['All', 'Beer',
-      'Cocktail', 'Cocoa', 'Shot', 'Other/Unknown'];
     if (location.endsWith('/foods')) {
       setCategories([...foodsCategories]);
     } else setCategories([...drinksCategories]);
@@ -17,10 +18,10 @@ const FilterButtons = () => {
 
   const handleClick = async ({ target: { value } }) => {
     if (value !== 'All') {
-      const meals = await fetchMealsByCategories(value);
+      const meals = await fetchMealsByCategories(value, location);
       client.setQueryData('meals', meals);
     } else {
-      const allMeals = await fetchAllMeals();
+      const allMeals = await fetchAllMeals(location);
       client.setQueryData('meals', allMeals);
     }
   };
