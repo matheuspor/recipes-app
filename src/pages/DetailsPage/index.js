@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-max-depth */
 import { Button, Card, CardActionArea, CardContent,
   CardMedia, Container, Paper, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
