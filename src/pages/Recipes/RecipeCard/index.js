@@ -8,7 +8,8 @@ const RecipeCard = ({ meal }) => {
   return (
     <Card sx={ { mt: 2 } }>
       <CardActionArea
-        onClick={ () => navigate(`/recipes-app/foods/${meal.idMeal}`, { state: meal }) }
+        onClick={ () => navigate(`/recipes-app/foods/${meal.idMeal || meal.idDrink}`,
+          { state: meal }) }
       >
         <CardMedia
           component="img"
@@ -36,6 +37,7 @@ RecipeCard.propTypes = {
     strDrink: PropTypes.string,
     strCategory: PropTypes.string,
     idMeal: PropTypes.string,
+    idDrink: PropTypes.string,
   }).isRequired,
 };
 
