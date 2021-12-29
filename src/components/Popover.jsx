@@ -6,6 +6,7 @@ import client from '../services/reactQueryClient';
 import { searchAndFetchMeals } from '../services/apiHelpers';
 
 export default function BasicPopover({ openPopover, closePopover }) {
+  const location = window.location.pathname;
   const [name, setName] = useState('');
   const [category, setCategory] = useState('Name');
   return (
@@ -13,7 +14,7 @@ export default function BasicPopover({ openPopover, closePopover }) {
       component="form"
       onSubmit={ async (event) => {
         event.preventDefault();
-        const meals = await searchAndFetchMeals(name, category);
+        const meals = await searchAndFetchMeals(name, category, location);
         client.setQueryData('meals', meals);
       } }
       open={ openPopover }

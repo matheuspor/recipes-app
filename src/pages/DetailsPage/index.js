@@ -5,10 +5,9 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-const DetailsPage = () => {
+export default function DetailsPage() {
   const location = useLocation();
   const { state: meal } = location;
-  console.log(location);
   return (
     <Container
       component="main"
@@ -43,7 +42,7 @@ const DetailsPage = () => {
       </Card>
     </Container>
   );
-};
+}
 
 DetailsPage.propTypes = {
   meal: PropTypes.shape({
@@ -55,5 +54,3 @@ DetailsPage.propTypes = {
     strCategory: PropTypes.string,
   }).isRequired,
 };
-
-export default DetailsPage;
