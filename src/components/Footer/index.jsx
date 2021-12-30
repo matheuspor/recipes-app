@@ -13,13 +13,13 @@ export default function Footer() {
         color="primary"
         sx={ { top: 'auto', bottom: 0 } }
       >
-        <Toolbar sx={ { justifyContent: 'space-between' } }>
+        <Toolbar sx={ { justifyContent: 'space-evenly' } }>
           <IconButton
             size="large"
             color="inherit"
             onClick={ () => navigate('/recipes-app/drinks') }
           >
-            <LocalBar sx={ { width: 30, height: 30 } } />
+            <LocalBar sx={ { width: 35, height: 35 } } />
           </IconButton>
           <IconButton
             size="large"
@@ -28,7 +28,7 @@ export default function Footer() {
             onClick={ () => navigate('/recipes-app/explore') }
             data-testid="profile-top-btn"
           >
-            <Explore sx={ { width: 30, height: 30 } } />
+            <Explore sx={ { width: 35, height: 35 } } />
           </IconButton>
           <IconButton
             size="large"
@@ -36,7 +36,7 @@ export default function Footer() {
             data-testid="search-top-btn"
             onClick={ () => navigate('/recipes-app/foods') }
           >
-            <RestaurantMenu sx={ { width: 30, height: 30 } } />
+            <RestaurantMenu sx={ { width: 35, height: 35 } } />
           </IconButton>
         </Toolbar>
       </AppBar>

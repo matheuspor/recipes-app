@@ -37,12 +37,12 @@ export default function Header() {
             data-testid="profile-top-btn"
           >
             <AccountCircle
-              sx={ { width: 30, height: 30 } }
+              sx={ { width: 35, height: 35 } }
             />
           </IconButton>
           <Typography
             data-testid="page-title"
-            variant="h6"
+            variant="h5"
             component="div"
             sx={ { textTransform: 'capitalize' } }
           >
@@ -54,7 +54,7 @@ export default function Header() {
             data-testid="search-top-btn"
             onClick={ () => setOpenPopover(!openPopover) }
           >
-            <Search sx={ { width: 30, height: 30 } } />
+            <Search sx={ { width: 35, height: 35 } } />
           </IconButton>
         </Toolbar>
       </AppBar>
