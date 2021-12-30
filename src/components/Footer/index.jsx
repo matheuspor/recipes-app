@@ -13,7 +13,7 @@ export default function Footer() {
         color="primary"
         sx={ { top: 'auto', bottom: 0 } }
       >
-        <Toolbar sx={ { justifyContent: 'space-evenly' } }>
+        <Toolbar sx={ { justifyContent: 'space-between' } }>
           <IconButton
             size="large"
             color="inherit"
