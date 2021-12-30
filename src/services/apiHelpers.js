@@ -5,6 +5,10 @@ const FOODS_BY_INGREDIENT = 'https://www.themealdb.com/api/json/v1/1/filter.php?
 const DRINKS_BY_INGREDIENT = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=';
 const FOODS_BY_CATEGORIES = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=';
 const DRINKS_BY_CATEGORIES = 'https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=';
+const FOOD_BY_ID = 'https://www.themealdb.com/api/json/v1/1/lookup.php?i=';
+const DRINK_BY_ID = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=';
+const ONE_RANDOM_MEAL = 'https://www.themealdb.com/api/json/v1/1/random.php';
+const ONE_RANDOM_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 
 export const fetcher = (url) => fetch(url)
   .then((response) => response.json())
@@ -16,24 +20,46 @@ export const fetcher = (url) => fetch(url)
   });
 
 export const fetchMealsByCategories = (name = '', location) => (
-  location.endsWith('/foods')
+  location.includes('/foods')
     ? fetcher(`${FOODS_BY_CATEGORIES}${name}`)
     : fetcher(`${DRINKS_BY_CATEGORIES}${name}`));
 
 export const searchAndFetchMeals = (name = '', category = '', location) => {
   if (category !== 'Name') {
-    return location.endsWith('/foods')
+    return location.includes('/foods')
       ? fetcher(`${FOODS_BY_INGREDIENT}${name}`)
       : fetcher(`${DRINKS_BY_INGREDIENT}${name}`);
   }
-  return location.endsWith('/foods')
+  return location.includes('/foods')
     ? fetcher(`${FOODS_BY_NAME}${name}`)
     : fetcher(`${DRINKS_BY_NAME}${name}`);
 };
 
 export const fetchAllMeals = (location) => {
-  if (location.endsWith('/foods')) {
+  if (location.includes('/foods')) {
     return fetcher(FOODS_BY_NAME);
   }
   return fetcher(DRINKS_BY_NAME);
+};
+
+export const fetchMealById = (id, location) => {
+  if (location.includes('foods')) {
+    return fetch(`${FOOD_BY_ID}${id}`)
+      .then((response) => response.json())
+      .then(({ meals }) => meals[0]);
+  }
+  return fetch(`${DRINK_BY_ID}${id}`)
+    .then((response) => response.json())
+    .then(({ drinks }) => drinks[0]);
+};
+
+export const fetchRandomMeal = (location) => {
+  if (location.includes('foods')) {
+    return fetch(ONE_RANDOM_MEAL)
+      .then((response) => response.json())
+      .then((data) => data.meals[0]);
+  }
+  return fetch(ONE_RANDOM_DRINK)
+    .then((response) => response.json())
+    .then((data) => data.drinks[0]);
 };

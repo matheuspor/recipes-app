@@ -1,28 +1,32 @@
 import { Button, Grid } from '@mui/material';
-import React from 'react';
-import { fetchAllMeals, fetchMealsByCategories } from '../../../services/apiHelpers';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { fetchMealsByCategories, fetchRandomMeal } from '../../../services/apiHelpers';
 import client from '../../../services/reactQueryClient';
 
-const foodsCategories = ['All', 'Beef', 'Lamb', 'Chicken', 'Breakfast', 'Dessert'];
-const drinksCategories = ['All', 'Beer', 'Cocktail', 'Cocoa', 'Shot', 'Other/Unknown'];
+const foodsCategories = ['Random', 'Beef', 'Lamb', 'Chicken', 'Breakfast', 'Dessert'];
+const drinksCategories = ['Random', 'Beer', 'Cocktail', 'Cocoa', 'Shot', 'Other/Unknown'];
 
 const FilterButtons = () => {
   const location = window.location.pathname;
-  const [categories, setCategories] = React.useState([]);
+  const [categories, setCategories] = useState([]);
+  const navigate = useNavigate();
 
-  React.useEffect(() => {
-    if (location.endsWith('/foods')) {
+  useEffect(() => {
+    if (location.includes('/foods')) {
       setCategories([...foodsCategories]);
     } else setCategories([...drinksCategories]);
   }, [location]);
 
   const handleClick = async ({ target: { value } }) => {
-    if (value !== 'All') {
+    if (value !== 'Random') {
       const meals = await fetchMealsByCategories(value, location);
       client.setQueryData('meals', meals);
     } else {
-      const allMeals = await fetchAllMeals(location);
-      client.setQueryData('meals', allMeals);
+      const randomMeal = await fetchRandomMeal(location);
+      navigate(`${location}/${randomMeal.idMeal || randomMeal.idDrink}`, {
+        state: randomMeal,
+      });
     }
   };
   return (

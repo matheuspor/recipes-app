@@ -5,10 +5,11 @@ import { useNavigate } from 'react-router-dom';
 
 const RecipeCard = ({ meal }) => {
   const navigate = useNavigate();
+  const location = window.location.pathname;
   return (
     <Card sx={ { mt: 2 } }>
       <CardActionArea
-        onClick={ () => navigate(`/recipes-app/foods/${meal.idMeal || meal.idDrink}`,
+        onClick={ () => navigate(`${location}/${meal.idMeal || meal.idDrink}`,
           { state: meal }) }
       >
         <CardMedia
