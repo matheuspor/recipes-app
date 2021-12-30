@@ -14,8 +14,8 @@ export default function SearchButton({ openPopover, closePopover }) {
       component="form"
       onSubmit={ async (event) => {
         event.preventDefault();
-        const meals = await searchAndFetchMeals(name, category, location);
-        client.setQueryData('meals', meals);
+        client.fetchQuery(['meals', location],
+          () => searchAndFetchMeals(name, category, location));
       } }
       open={ openPopover }
       onClose={ closePopover }

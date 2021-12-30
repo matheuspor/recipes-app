@@ -20,8 +20,12 @@ const FilterButtons = () => {
 
   const handleClick = async ({ target: { value } }) => {
     if (value !== 'Random') {
+      // eslint-disable-next-line no-unused-vars
       const meals = await fetchMealsByCategories(value, location);
-      client.setQueryData('meals', meals);
+      client.fetchQuery(['meals', location],
+        () => fetchMealsByCategories(value, location));
+      console.log(test);
+      // client.setQueryData(['meals', location], meals);
     } else {
       const randomMeal = await fetchRandomMeal(location);
       navigate(`${location}/${randomMeal.idMeal || randomMeal.idDrink}`, {
