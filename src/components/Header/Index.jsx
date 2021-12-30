@@ -8,8 +8,16 @@ import SearchButton from './SearchButton';
 export default function Header() {
   const [openPopover, setOpenPopover] = useState(false);
   const { pathname } = useLocation();
-  const treatedLocation = pathname.split('/')[2];
   const navigate = useNavigate();
+
+  const treatedLocation = () => {
+    const PATHNAME_LENGTH = 3;
+    const untreatedLocation = pathname.split('/');
+    if (untreatedLocation.length > PATHNAME_LENGTH) {
+      return `${untreatedLocation[2]} ${untreatedLocation[3]}`;
+    }
+    return untreatedLocation[2];
+  };
   return (
     <>
       <AppBar
@@ -38,7 +46,7 @@ export default function Header() {
             component="div"
             sx={ { textTransform: 'capitalize' } }
           >
-            {treatedLocation}
+            {treatedLocation()}
           </Typography>
           <IconButton
             size="large"
