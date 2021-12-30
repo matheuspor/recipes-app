@@ -20,7 +20,7 @@ export default function Header() {
           closePopover={ () => setOpenPopover(!openPopover) }
           openPopover={ openPopover }
         />
-        <Toolbar sx={ { justifyContent: 'center' } }>
+        <Toolbar sx={ { justifyContent: 'space-evenly' } }>
           <IconButton
             size="large"
             edge="start"
@@ -36,7 +36,7 @@ export default function Header() {
             data-testid="page-title"
             variant="h6"
             component="div"
-            sx={ { mx: 4, textTransform: 'capitalize' } }
+            sx={ { textTransform: 'capitalize' } }
           >
             {treatedLocation}
           </Typography>
