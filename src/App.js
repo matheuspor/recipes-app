@@ -4,10 +4,15 @@ import React from 'react';
 import Login from './pages/Login';
 import Recipes from './pages/Recipes';
 import DetailsPage from './pages/DetailsPage';
+import Explore from './pages/Explore';
+import ExploreFoodsDrinks from './pages/ExploreFoodsDrinks';
 
 function App() {
   return (
     <Routes>
+      <Route path="/recipes-app/explore" element={ <Explore /> } />
+      <Route path="/recipes-app/explore/foods" element={ <ExploreFoodsDrinks /> } />
+      <Route path="/recipes-app/explore/drinks" element={ <ExploreFoodsDrinks /> } />
       <Route path="/recipes-app" element={ <Login /> } />
       <Route path="/recipes-app/foods" element={ <Recipes /> } />
       <Route path="/recipes-app/drinks" element={ <Recipes /> } />
