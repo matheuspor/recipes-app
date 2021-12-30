@@ -3,7 +3,7 @@ import { AppBar, IconButton,
   Toolbar, Typography } from '@mui/material';
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import BasicPopover from './Popover';
+import SearchButton from './SearchButton';
 
 export default function Header() {
   const [openPopover, setOpenPopover] = useState(false);
@@ -16,7 +16,7 @@ export default function Header() {
         position="fixed"
         color="primary"
       >
-        <BasicPopover
+        <SearchButton
           closePopover={ () => setOpenPopover(!openPopover) }
           openPopover={ openPopover }
         />

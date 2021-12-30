@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Button, FormControlLabel, Menu,
   MenuItem, Radio, RadioGroup, TextField } from '@mui/material';
-import client from '../services/reactQueryClient';
-import { searchAndFetchMeals } from '../services/apiHelpers';
+import client from '../../../services/reactQueryClient';
+import { searchAndFetchMeals } from '../../../services/apiHelpers';
 
-export default function BasicPopover({ openPopover, closePopover }) {
+export default function SearchButton({ openPopover, closePopover }) {
   const location = window.location.pathname;
   const [name, setName] = useState('');
   const [category, setCategory] = useState('Name');
@@ -54,7 +54,7 @@ export default function BasicPopover({ openPopover, closePopover }) {
   );
 }
 
-BasicPopover.propTypes = {
+SearchButton.propTypes = {
   openPopover: PropTypes.bool.isRequired,
   closePopover: PropTypes.func.isRequired,
   anchorOrigin: PropTypes.shape({

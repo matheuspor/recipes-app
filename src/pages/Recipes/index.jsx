@@ -2,7 +2,7 @@ import { Container, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
-import Header from '../../components/Header';
+import Header from '../../components/Header/Index';
 import { fetchAllMeals } from '../../services/apiHelpers';
 import FilterButtons from './FilterButtons';
 import RecipeCard from './RecipeCard';
