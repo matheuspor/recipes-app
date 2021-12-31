@@ -23,7 +23,6 @@ export default function Footer() {
           </IconButton>
           <IconButton
             size="large"
-            edge="start"
             color="inherit"
             onClick={ () => navigate('/recipes-app/explore') }
             data-testid="profile-top-btn"

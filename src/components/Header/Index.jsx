@@ -31,7 +31,6 @@ export default function Header() {
         <Toolbar sx={ { justifyContent: 'space-evenly' } }>
           <IconButton
             size="large"
-            edge="start"
             color="inherit"
             onClick={ () => navigate('recipes-app/profile') }
             data-testid="profile-top-btn"
