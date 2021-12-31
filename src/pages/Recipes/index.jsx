@@ -12,10 +12,7 @@ import RecipeCard from './RecipeCard';
 export default function Recipes() {
   const location = useLocation();
   const { isFetching, data: meals } = useQuery(['meals', location.pathname],
-    () => fetchAllMeals(location.pathname), {
-      cacheTime: 0,
-      staleTime: Infinity,
-    });
+    () => fetchAllMeals(location.pathname));
   if (isFetching) {
     return (
       <LoadingCircular open={ isFetching } />

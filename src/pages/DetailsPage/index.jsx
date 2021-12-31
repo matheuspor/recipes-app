@@ -13,10 +13,7 @@ export default function DetailsPage() {
   const navigate = useNavigate();
 
   const { isFetching, data: meal } = useQuery('meal',
-    () => fetchMealById((state.idMeal || state.idDrink), location.pathname), {
-      cacheTime: 0,
-      staleTime: Infinity,
-    });
+    () => fetchMealById((state.idMeal || state.idDrink), location.pathname));
   const countIngredients = (() => {
     const ingredientsCount = [];
     let count = 1;
