@@ -14,6 +14,7 @@ export default function Recipes() {
   const { isFetching, data: meals } = useQuery(['meals', location.pathname],
     () => fetchAllMeals(location.pathname), {
       cacheTime: 0,
+      staleTime: Infinity,
     });
   if (isFetching) {
     return (
@@ -42,7 +43,7 @@ export default function Recipes() {
             xs={ 2 }
             sm={ 4 }
             md={ 4 }
-            key={ meal.idMeal }
+            key={ `${index}-${meal.idMeal}` }
           >
             <RecipeCard meal={ meal } />
           </Grid>

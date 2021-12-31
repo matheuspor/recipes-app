@@ -15,8 +15,8 @@ export default function DetailsPage() {
   const { isFetching, data: meal } = useQuery('meal',
     () => fetchMealById((state.idMeal || state.idDrink), location.pathname), {
       cacheTime: 0,
+      staleTime: Infinity,
     });
-
   const countIngredients = (() => {
     const ingredientsCount = [];
     let count = 1;
@@ -26,7 +26,6 @@ export default function DetailsPage() {
     }
     return ingredientsCount;
   });
-
   if (isFetching) {
     return <LoadingCircular open={ isFetching } />;
   }
