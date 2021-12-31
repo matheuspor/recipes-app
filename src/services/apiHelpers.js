@@ -72,3 +72,10 @@ export const fetchIngredients = (location) => {
   }
   return fetcher(DRINKS_INGREDIENTS);
 };
+
+export const fetchByIngredients = (ingredient, location) => {
+  if (location.includes('foods')) {
+    return fetcher(`${FOODS_BY_INGREDIENT}${ingredient}`);
+  }
+  return fetcher(`${DRINKS_BY_INGREDIENT}${ingredient}`);
+};

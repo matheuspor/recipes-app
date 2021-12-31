@@ -1,4 +1,4 @@
-import { Card, CardContent, CardMedia,
+import { Card, CardActionArea, CardContent, CardMedia,
   Container, Grid, Typography } from '@mui/material';
 import React from 'react';
 import { useQuery } from 'react-query';
@@ -6,12 +6,14 @@ import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Index';
 import LoadingCircular from '../../components/LoadingCircular';
-import { fetchIngredients } from '../../services/apiHelpers';
+import { fetchByIngredients, fetchIngredients } from '../../services/apiHelpers';
+import client from '../../services/reactQueryClient';
 
 export default function ExploreByIngredients() {
-  // eslint-disable-next-line no-unused-vars
   const navigate = useNavigate();
   const location = window.location.pathname;
+  const redirectLocation = location.includes('foods')
+    ? '/recipes-app/foods' : '/recipes-app/drinks';
   const { isFetching, data: ingredients } = useQuery(
     ['ingredients', location], () => fetchIngredients(location),
   );
@@ -44,18 +46,29 @@ export default function ExploreByIngredients() {
             key={ index }
           >
             <Card sx={ { mt: 2 } }>
-              <CardMedia
-                component="img"
-                image={ location.includes('foods')
-                  ? `http://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png`
-                  : `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}.png` }
-                alt="meal photo"
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h6" component="div">
-                  {ingredient.strIngredient || ingredient.strIngredient1}
-                </Typography>
-              </CardContent>
+              <CardActionArea
+                onClick={ ({ target }) => {
+                  client.fetchQuery(
+                    ['meals', redirectLocation],
+                    () => fetchByIngredients(target.name, location),
+                  );
+                  navigate(redirectLocation);
+                } }
+              >
+                <CardMedia
+                  name={ ingredient.strIngredient || ingredient.strIngredient1 }
+                  component="img"
+                  image={ location.includes('foods')
+                    ? `http://www.themealdb.com/images/ingredients/${ingredient.strIngredient}.png`
+                    : `https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}.png` }
+                  alt="meal photo"
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {ingredient.strIngredient || ingredient.strIngredient1}
+                  </Typography>
+                </CardContent>
+              </CardActionArea>
             </Card>
           </Grid>
         ))}
