@@ -3,14 +3,16 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Index';
+import { fetchRandomMeal } from '../../services/apiHelpers';
 
 export default function ExploreFoodsDrinks() {
   const navigate = useNavigate();
+  const location = window.location.pathname;
   return (
     <Container
       component="main"
       maxWidth="xs"
-      sx={ { my: 4 } }
+      sx={ { mb: 10 } }
     >
       <Header />
       <Stack
@@ -21,21 +23,28 @@ export default function ExploreFoodsDrinks() {
         <Button
           variant="outlined"
           sx={ { py: 4 } }
-          onClick={ () => navigate('/recipes-app/explore/foods') }
+          onClick={ () => navigate(`${location}/ingredients`) }
         >
           By Ingredients
         </Button>
         <Button
           variant="outlined"
           sx={ { py: 4 } }
-          onClick={ () => navigate('/recipes-app/explore/drinks') }
+          onClick={ () => navigate(`${location}/area`) }
         >
           By Area
         </Button>
         <Button
           variant="outlined"
           sx={ { py: 4 } }
-          onClick={ () => navigate('/recipes-app/explore/drinks') }
+          onClick={ async () => {
+            const randomMeal = await fetchRandomMeal(location);
+            const treatedLocation = location.replace('/explore', '');
+            navigate(`${treatedLocation}/${randomMeal.idMeal || randomMeal.idDrink}`,
+              {
+                state: randomMeal,
+              });
+          } }
         >
           Surprise Me!
         </Button>
