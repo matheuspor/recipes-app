@@ -10,7 +10,6 @@ export default function Explore() {
     <Container
       component="main"
       maxWidth="xs"
-      sx={ { my: 4 } }
     >
       <Header />
       <Stack

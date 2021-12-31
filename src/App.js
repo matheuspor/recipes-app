@@ -6,11 +6,21 @@ import Recipes from './pages/Recipes';
 import DetailsPage from './pages/DetailsPage';
 import Explore from './pages/Explore';
 import ExploreFoodsDrinks from './pages/ExploreFoodsDrinks';
+import ExploreByIngredients from './pages/ExploreByIngredients';
 
 function App() {
   return (
     <Routes>
       <Route path="/recipes-app/explore" element={ <Explore /> } />
+      <Route
+        path="/recipes-app/explore/foods/ingredients"
+        element={ <ExploreByIngredients /> }
+      />
+      <Route
+        path="/recipes-app/explore/drinks/ingredients"
+        element={ <ExploreByIngredients /> }
+      />
+      {/* <Route path="/recipes-app/explore/foods/area" element={ <Explore /> } /> */}
       <Route path="/recipes-app/explore/foods" element={ <ExploreFoodsDrinks /> } />
       <Route path="/recipes-app/explore/drinks" element={ <ExploreFoodsDrinks /> } />
       <Route path="/recipes-app" element={ <Login /> } />
