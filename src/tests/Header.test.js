@@ -2,7 +2,7 @@ import { screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import userEvent from '@testing-library/user-event';
 import renderWithRouter from './renderWithRouter';
-import Header from '../components/Header';
+import Header from '../components/Header/Index';
 
 const datatestIds = {
   profileIcon: 'profile-top-btn',

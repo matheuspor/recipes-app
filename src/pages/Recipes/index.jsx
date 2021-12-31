@@ -4,17 +4,20 @@ import { useQuery } from 'react-query';
 import { useLocation } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Index';
+import LoadingCircular from '../../components/LoadingCircular';
 import { fetchAllMeals } from '../../services/apiHelpers';
 import FilterButtons from './FilterButtons';
 import RecipeCard from './RecipeCard';
 
 export default function Recipes() {
   const location = useLocation();
-  const { isLoading, data: meals } = useQuery(['meals', location.pathname],
-    () => fetchAllMeals(location.pathname));
-  if (isLoading) {
+  const { isFetching, data: meals } = useQuery(['meals', location.pathname],
+    () => fetchAllMeals(location.pathname), {
+      cacheTime: 0,
+    });
+  if (isFetching) {
     return (
-      <h1>Loading...</h1>
+      <LoadingCircular open={ isFetching } />
     );
   }
   return (

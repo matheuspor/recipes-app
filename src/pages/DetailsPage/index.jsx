@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useQuery } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
+import LoadingCircular from '../../components/LoadingCircular';
 import { fetchMealById } from '../../services/apiHelpers';
 
 export default function DetailsPage() {
@@ -11,7 +12,7 @@ export default function DetailsPage() {
   const { state } = location;
   const navigate = useNavigate();
 
-  const { isLoading, data: meal } = useQuery('meal',
+  const { isFetching, data: meal } = useQuery('meal',
     () => fetchMealById((state.idMeal || state.idDrink), location.pathname), {
       cacheTime: 0,
     });
@@ -26,8 +27,8 @@ export default function DetailsPage() {
     return ingredientsCount;
   });
 
-  if (isLoading) {
-    return <h1>Loading...</h1>;
+  if (isFetching) {
+    return <LoadingCircular open={ isFetching } />;
   }
 
   return (
