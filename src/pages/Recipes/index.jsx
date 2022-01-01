@@ -5,14 +5,16 @@ import { useLocation } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Index';
 import LoadingCircular from '../../components/LoadingCircular';
-import { fetchAllMeals } from '../../services/apiHelpers';
+import { fetchAllMeals, fetchFoodsCountries } from '../../services/apiHelpers';
+import ExploreByArea from '../ExploreByArea';
 import FilterButtons from './FilterButtons';
 import RecipeCard from './RecipeCard';
 
 export default function Recipes() {
-  const location = useLocation();
-  const { isFetching, data: meals } = useQuery(['meals', location.pathname],
-    () => fetchAllMeals(location.pathname));
+  const { pathname } = useLocation();
+  const { isFetching, data: meals } = useQuery(['meals', pathname],
+    () => fetchAllMeals(pathname));
+  const { data: categories } = useQuery('categories', () => fetchFoodsCountries());
   if (isFetching) {
     return (
       <LoadingCircular open={ isFetching } />
@@ -25,7 +27,13 @@ export default function Recipes() {
       sx={ { my: 2 } }
     >
       <Header />
-      <FilterButtons />
+      {pathname.includes('explore')
+        ? (
+          <ExploreByArea categories={ categories } />
+        )
+        : (
+          <FilterButtons />
+        )}
       <Grid
         container
         spacing={ { xs: 2, md: 3 } }

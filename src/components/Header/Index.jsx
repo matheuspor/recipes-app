@@ -45,7 +45,7 @@ export default function Header() {
             component="div"
             sx={ { textTransform: 'capitalize' } }
           >
-            {treatedLocation()}
+            {pathname.includes('explore') ? 'Explore Origin' : treatedLocation()}
           </Typography>
           <IconButton
             size="large"
