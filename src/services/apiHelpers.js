@@ -11,6 +11,8 @@ const ONE_RANDOM_MEAL = 'https://www.themealdb.com/api/json/v1/1/random.php';
 const ONE_RANDOM_DRINK = 'https://www.thecocktaildb.com/api/json/v1/1/random.php';
 const FOODS_INGREDIENTS = 'https://www.themealdb.com/api/json/v1/1/list.php?i=list';
 const DRINKS_INGREDIENTS = 'https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list';
+const FOODS_AREA = 'https://www.themealdb.com/api/json/v1/1/list.php?a=list';
+const FOODS_BY_AREA = 'https://www.themealdb.com/api/json/v1/1/filter.php?a=';
 
 export const fetcher = (url) => fetch(url)
   .then((response) => response.json())
@@ -79,3 +81,9 @@ export const fetchByIngredients = (ingredient, location) => {
   }
   return fetcher(`${DRINKS_BY_INGREDIENT}${ingredient}`);
 };
+
+export const fetchFoodsCountries = () => fetch(FOODS_AREA)
+  .then((response) => response.json())
+  .then((data) => data.meals);
+
+export const fetchFoodsByArea = (area) => fetcher(`${FOODS_BY_AREA}${area}`);

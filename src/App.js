@@ -20,9 +20,9 @@ function App() {
         path="/recipes-app/explore/drinks/ingredients"
         element={ <ExploreByIngredients /> }
       />
-      {/* <Route path="/recipes-app/explore/foods/area" element={ <Explore /> } /> */}
       <Route path="/recipes-app/explore/foods" element={ <ExploreFoodsDrinks /> } />
       <Route path="/recipes-app/explore/drinks" element={ <ExploreFoodsDrinks /> } />
+      <Route path="/recipes-app/explore/foods/area" element={ <Recipes /> } />
       <Route path="/recipes-app" element={ <Login /> } />
       <Route path="/recipes-app/foods" element={ <Recipes /> } />
       <Route path="/recipes-app/drinks" element={ <Recipes /> } />
