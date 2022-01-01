@@ -27,7 +27,7 @@ export default function Recipes() {
       sx={ { my: 2 } }
     >
       <Header />
-      {pathname.includes('explore')
+      {(pathname.includes('explore') && categories)
         ? (
           <ExploreByArea categories={ categories } />
         )

@@ -27,13 +27,15 @@ export default function ExploreFoodsDrinks() {
         >
           By Ingredients
         </Button>
-        <Button
-          variant="outlined"
-          sx={ { py: 4 } }
-          onClick={ () => navigate(`${location}/area`) }
-        >
-          By Area
-        </Button>
+        {location.includes('foods') && (
+          <Button
+            variant="outlined"
+            sx={ { py: 4 } }
+            onClick={ () => navigate(`${location}/area`) }
+          >
+            By Area
+          </Button>
+        )}
         <Button
           variant="outlined"
           sx={ { py: 4 } }
