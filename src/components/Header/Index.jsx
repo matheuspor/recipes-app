@@ -16,6 +16,10 @@ export default function Header() {
     if (untreatedLocation.length > PATHNAME_LENGTH) {
       return `${untreatedLocation[2]} ${untreatedLocation[3]}`;
     }
+    if (untreatedLocation[2].includes('made')
+    || untreatedLocation[2].includes('favorite')) {
+      return untreatedLocation[2].replace('-', ' ');
+    }
     return untreatedLocation[2];
   };
   return (
@@ -45,7 +49,7 @@ export default function Header() {
             component="div"
             sx={ { textTransform: 'capitalize' } }
           >
-            {pathname.includes('explore') ? 'Explore Origin' : treatedLocation()}
+            {pathname.includes('area') ? 'Explore Origin' : treatedLocation()}
           </Typography>
           <IconButton
             size="large"

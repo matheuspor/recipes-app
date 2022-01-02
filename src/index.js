@@ -9,13 +9,16 @@ import { ReactQueryDevtools } from 'react-query/devtools';
 import App from './App';
 import theme from './theme';
 import client from './services/reactQueryClient';
+import Provider from './context/provider';
 
 ReactDOM.render(
   <BrowserRouter>
     <ThemeProvider theme={ theme }>
       <QueryClientProvider client={ client }>
-        <CssBaseline />
-        <App />
+        <Provider>
+          <CssBaseline />
+          <App />
+        </Provider>
         <ReactQueryDevtools />
       </QueryClientProvider>
     </ThemeProvider>
