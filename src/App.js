@@ -7,11 +7,13 @@ import DetailsPage from './pages/DetailsPage';
 import Explore from './pages/Explore';
 import ExploreFoodsDrinks from './pages/ExploreFoodsDrinks';
 import ExploreByIngredients from './pages/ExploreByIngredients';
+import MadeRecipes from './pages/MadeRecipes';
 
 function App() {
   return (
     <Routes>
       <Route path="/recipes-app/explore" element={ <Explore /> } />
+      <Route path="/recipes-app/made-recipes" element={ <MadeRecipes /> } />
       <Route
         path="/recipes-app/explore/foods/ingredients"
         element={ <ExploreByIngredients /> }

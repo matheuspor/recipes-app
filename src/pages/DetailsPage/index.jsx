@@ -1,16 +1,21 @@
 import { Button, Card, CardActionArea, CardContent,
   CardMedia, Container, Paper, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext } from 'react';
 import { useQuery } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoadingCircular from '../../components/LoadingCircular';
+import context from '../../context/context';
 import { fetchMealById } from '../../services/apiHelpers';
 
 export default function DetailsPage() {
   const location = useLocation();
   const { state } = location;
   const navigate = useNavigate();
+  const { setMadeRecipes, madeRecipes } = useContext(context);
+
+  const today = new Date();
+  const date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
 
   const { isFetching, data: meal } = useQuery('meal',
     () => fetchMealById((state.idMeal || state.idDrink), location.pathname));
@@ -99,11 +104,13 @@ export default function DetailsPage() {
           <Button
             variant="contained"
             sx={ { margin: '0 auto', display: 'flex' } }
-            onClick={ () => (
-              navigate(`${location.pathname}/in-progress`)
-            ) }
+            onClick={ () => {
+              const mealWithDate = { ...meal, madeIn: date };
+              setMadeRecipes([...madeRecipes, mealWithDate]);
+              navigate('/recipes-app/made-recipes');
+            } }
           >
-            Start Recipe
+            Make Recipe
           </Button>
         </CardContent>
       </Card>
