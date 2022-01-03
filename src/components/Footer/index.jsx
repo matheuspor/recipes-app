@@ -26,9 +26,9 @@ export default function Footer() {
             color="inherit"
             onClick={ () => navigate('/recipes-app/explore') }
             data-testid="profile-top-btn"
-            sx={ { mx: 10 } }
+            sx={ { mx: 8 } }
           >
-            <Explore sx={ { width: 35, height: 35, mx: 8 } } />
+            <Explore sx={ { width: 35, height: 35 } } />
           </IconButton>
           <IconButton
             size="large"

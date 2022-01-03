@@ -47,7 +47,7 @@ export default function Header() {
             data-testid="page-title"
             variant="h5"
             component="div"
-            sx={ { textTransform: 'capitalize', mx: 8 } }
+            sx={ { textTransform: 'capitalize', mx: 6 } }
           >
             {pathname.includes('area') ? 'Explore Origin' : treatedLocation()}
           </Typography>

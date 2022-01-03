@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import React, { useContext, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
+import Footer from '../../components/Footer';
 import LoadingCircular from '../../components/LoadingCircular';
 import context from '../../context/context';
 import { fetchMealById } from '../../services/apiHelpers';
@@ -67,7 +68,7 @@ export default function DetailsPage() {
         />
         <CardContent>
           <Grid container>
-            <Typography variant="h5" sx={ { mb: -0.5 } }>
+            <Typography variant="h5">
               {meal.strMeal || meal.strDrink}
             </Typography>
             <Grid item sx={ { ml: 'auto' } }>
@@ -86,7 +87,7 @@ export default function DetailsPage() {
               </IconButton>
             </Grid>
           </Grid>
-          <Typography sx={ { mb: 1.5 } } variant="body2" color="text.secondary">
+          <Typography sx={ { mb: 1.5, mt: -2 } } variant="body2" color="text.secondary">
             {meal.strCategory}
           </Typography>
           <Typography variant="h6" sx={ { mb: 0.5 } }>
@@ -153,6 +154,7 @@ export default function DetailsPage() {
           </Button>
         </CardContent>
       </Card>
+      <Footer />
     </Container>
   );
 }
