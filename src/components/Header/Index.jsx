@@ -36,7 +36,7 @@ export default function Header() {
           <IconButton
             size="large"
             color="inherit"
-            onClick={ () => navigate('recipes-app/profile') }
+            onClick={ () => navigate('/recipes-app/profile') }
             data-testid="profile-top-btn"
           >
             <AccountCircle

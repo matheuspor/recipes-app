@@ -2,16 +2,19 @@ import { Button, Container, Grid } from '@mui/material';
 import React, { useContext, useState, useEffect } from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Index';
-import MadeFavoriteRecipes from '../../components/MadeFavoriteRecipes';
+import MadeFavoriteRecipesCard from '../../components/MadeFavoriteRecipes';
 import context from '../../context/context';
 
-export default function MadeRecipes() {
-  const { madeRecipes } = useContext(context);
+export default function MadeFavoriteRecipes() {
+  const location = window.location.pathname;
+  const { madeRecipes, favoriteRecipes } = useContext(context);
   const [recipes, setRecipes] = useState();
+  const recipesBasedOnLocation = location.includes('favorite')
+    ? favoriteRecipes : madeRecipes;
 
   useEffect(() => {
-    setRecipes(madeRecipes);
-  }, [madeRecipes]);
+    setRecipes(recipesBasedOnLocation);
+  }, [recipesBasedOnLocation]);
 
   return (
     <Container
@@ -25,7 +28,7 @@ export default function MadeRecipes() {
             sx={ { mt: 2 } }
             variant="contained"
             onClick={ () => {
-              setRecipes(madeRecipes);
+              setRecipes(recipesBasedOnLocation);
             } }
           >
             All
@@ -36,8 +39,9 @@ export default function MadeRecipes() {
             sx={ { mt: 2 } }
             variant="contained"
             onClick={ () => {
-              const justFoods = madeRecipes.filter((recipe) => Object.keys(recipe)
-                .find((key) => key === 'strMeal'));
+              const justFoods = recipesBasedOnLocation
+                .filter((recipe) => Object.keys(recipe)
+                  .find((key) => key === 'strMeal'));
               setRecipes(justFoods);
             } }
           >
@@ -49,8 +53,9 @@ export default function MadeRecipes() {
             sx={ { mt: 2 } }
             variant="contained"
             onClick={ () => {
-              const justDrinks = madeRecipes.filter((recipe) => Object.keys(recipe)
-                .find((key) => key === 'strDrink'));
+              const justDrinks = recipesBasedOnLocation
+                .filter((recipe) => Object.keys(recipe)
+                  .find((key) => key === 'strDrink'));
               setRecipes(justDrinks);
             } }
           >
@@ -59,7 +64,7 @@ export default function MadeRecipes() {
         </Grid>
       </Grid>
       {recipes && recipes.map((meal) => (
-        <MadeFavoriteRecipes key={ meal.idMeal } meal={ meal } />))}
+        <MadeFavoriteRecipesCard key={ meal.idMeal } meal={ meal } />))}
       <Footer />
     </Container>
   );
