@@ -32,7 +32,7 @@ export default function Header() {
           closePopover={ () => setOpenPopover(!openPopover) }
           openPopover={ openPopover }
         />
-        <Toolbar sx={ { justifyContent: 'space-evenly' } }>
+        <Toolbar sx={ { justifyContent: 'center' } }>
           <IconButton
             size="large"
             color="inherit"
@@ -47,7 +47,7 @@ export default function Header() {
             data-testid="page-title"
             variant="h5"
             component="div"
-            sx={ { textTransform: 'capitalize' } }
+            sx={ { textTransform: 'capitalize', mx: 8 } }
           >
             {pathname.includes('area') ? 'Explore Origin' : treatedLocation()}
           </Typography>

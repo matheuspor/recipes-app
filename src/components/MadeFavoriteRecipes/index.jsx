@@ -53,8 +53,8 @@ export default function MadeFavoriteRecipesCard({ meal }) {
                 {`Made in ${meal.madeIn}`}
               </Typography>
             )}
-            {tagsArray && tagsArray.map((tag) => (
-              <Chip sx={ { mr: 1, mt: 1 } } label={ tag } key={ tag } />
+            {tagsArray && tagsArray.map((tag, index) => (
+              <Chip sx={ { mr: 1, mt: 1 } } label={ tag } key={ index } />
             ))}
           </CardContent>
         </Grid>

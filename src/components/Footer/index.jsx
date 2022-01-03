@@ -13,7 +13,7 @@ export default function Footer() {
         color="primary"
         sx={ { top: 'auto', bottom: 0 } }
       >
-        <Toolbar sx={ { justifyContent: 'space-evenly' } }>
+        <Toolbar sx={ { justifyContent: 'center' } }>
           <IconButton
             size="large"
             color="inherit"
@@ -26,8 +26,9 @@ export default function Footer() {
             color="inherit"
             onClick={ () => navigate('/recipes-app/explore') }
             data-testid="profile-top-btn"
+            sx={ { mx: 10 } }
           >
-            <Explore sx={ { width: 35, height: 35 } } />
+            <Explore sx={ { width: 35, height: 35, mx: 8 } } />
           </IconButton>
           <IconButton
             size="large"

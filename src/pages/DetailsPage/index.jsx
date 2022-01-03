@@ -19,6 +19,11 @@ export default function DetailsPage() {
   const { setMadeRecipes, madeRecipes, setFavoriteRecipes, favoriteRecipes,
   } = useContext(context);
 
+  const checkIfMealAlreadyMade = (mealId) => (madeRecipes
+    .some((recipe) => (recipe.idMeal
+      ? recipe.idMeal === mealId
+      : recipe.idDrink === mealId)));
+
   const { isFetching, data: meal } = useQuery('meal',
     () => fetchMealById((state.idMeal || state.idDrink), location.pathname));
   const countIngredients = (() => {
@@ -137,8 +142,10 @@ export default function DetailsPage() {
             variant="contained"
             sx={ { margin: '0 auto', display: 'flex' } }
             onClick={ () => {
-              const mealWithDate = { ...meal, madeIn: date };
-              setMadeRecipes([...madeRecipes, mealWithDate]);
+              if (!checkIfMealAlreadyMade(meal.idMeal || meal.idDrink)) {
+                const mealWithDate = { ...meal, madeIn: date };
+                setMadeRecipes([...madeRecipes, mealWithDate]);
+              }
               navigate('/recipes-app/made-recipes');
             } }
           >
