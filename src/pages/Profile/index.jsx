@@ -18,7 +18,7 @@ export default function Profile() {
         spacing={ 3 }
         sx={ { alignItems: 'center', textAlign: 'center' } }
       >
-        <Typography variant="h5">
+        <Typography variant="h6">
           {user.email}
         </Typography>
         <Button
