@@ -4,7 +4,9 @@ import context from './context';
 
 export default function Provider({ children }) {
   const [madeRecipes, setMadeRecipes] = useState([]);
-  const contextValue = { madeRecipes, setMadeRecipes };
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  const contextValue = {
+    madeRecipes, favoriteRecipes, setMadeRecipes, setFavoriteRecipes };
   return (
     <context.Provider
       value={ contextValue }

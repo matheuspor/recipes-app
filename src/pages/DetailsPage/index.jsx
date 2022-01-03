@@ -1,7 +1,10 @@
+/* eslint-disable sonarjs/cognitive-complexity */
+/* eslint-disable react/jsx-max-depth */
+import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { Button, Card, CardActionArea, CardContent,
-  CardMedia, Container, Paper, Typography } from '@mui/material';
+  CardMedia, Container, Grid, IconButton, Paper, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { useLocation, useNavigate } from 'react-router-dom';
 import LoadingCircular from '../../components/LoadingCircular';
@@ -10,12 +13,11 @@ import { fetchMealById } from '../../services/apiHelpers';
 
 export default function DetailsPage() {
   const location = useLocation();
+  const [isFavorite, setIsFavorite] = useState(false);
   const { state } = location;
   const navigate = useNavigate();
-  const { setMadeRecipes, madeRecipes } = useContext(context);
-
-  const today = new Date();
-  const date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
+  const { setMadeRecipes, madeRecipes, setFavoriteRecipes, favoriteRecipes,
+  } = useContext(context);
 
   const { isFetching, data: meal } = useQuery('meal',
     () => fetchMealById((state.idMeal || state.idDrink), location.pathname));
@@ -28,6 +30,19 @@ export default function DetailsPage() {
     }
     return ingredientsCount;
   });
+
+  const today = new Date();
+  const date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
+  const checkFavorite = favoriteRecipes.some((recipe) => (
+    recipe.idMeal
+      ? recipe.idMeal === meal.idMeal
+      : recipe.idDrink === meal.idDrink));
+
+  useEffect(() => {
+    if (checkFavorite) setIsFavorite(true);
+    else setIsFavorite(false);
+  }, [favoriteRecipes, meal, checkFavorite]);
+
   if (isFetching) {
     return <LoadingCircular open={ isFetching } />;
   }
@@ -46,9 +61,26 @@ export default function DetailsPage() {
           alt="meal photo"
         />
         <CardContent>
-          <Typography variant="h5" sx={ { mb: -0.5 } }>
-            {meal.strMeal || meal.strDrink}
-          </Typography>
+          <Grid container>
+            <Typography variant="h5" sx={ { mb: -0.5 } }>
+              {meal.strMeal || meal.strDrink}
+            </Typography>
+            <Grid item sx={ { ml: 'auto' } }>
+              <IconButton
+                onClick={ () => {
+                  if (checkFavorite) {
+                    const removeFavorite = favoriteRecipes
+                      .filter((recipe) => recipe.idMeal !== meal.idMeal);
+                    setFavoriteRecipes(removeFavorite);
+                  } else setFavoriteRecipes([...favoriteRecipes, meal]);
+                } }
+              >
+                {isFavorite
+                  ? <Favorite sx={ { fontSize: 30 } } />
+                  : <FavoriteBorder sx={ { fontSize: 30 } } />}
+              </IconButton>
+            </Grid>
+          </Grid>
           <Typography sx={ { mb: 1.5 } } variant="body2" color="text.secondary">
             {meal.strCategory}
           </Typography>
