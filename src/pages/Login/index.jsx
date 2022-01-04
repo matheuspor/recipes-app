@@ -1,28 +1,14 @@
 import { Button, Container, Stack, TextField, Typography } from '@mui/material';
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
-const MIN_PASSWORD_LENGTH = 6;
+import React from 'react';
+import useLoginHelper from './helper';
 
 export default function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [formCheck, setFormCheck] = useState(true);
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (email && (password.length >= MIN_PASSWORD_LENGTH)) {
-      setFormCheck(false);
-    } else setFormCheck(true);
-  }, [email, password]);
-  useEffect(() => {
-    localStorage.setItem('mealsToken', 1);
-    localStorage.setItem('cocktailsToken', 1);
-  }, []);
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    localStorage.setItem('user', JSON.stringify({ email }));
-    navigate('/recipes-app/foods');
-  };
+  const {
+    isLoginDisabled,
+    handleChange,
+    handleSubmit,
+  } = useLoginHelper();
+
   return (
     <Container
       component="main"
@@ -45,7 +31,7 @@ export default function Login() {
           autoComplete="email"
           label="Email"
           variant="outlined"
-          onChange={ ({ target: { value } }) => setEmail(value) }
+          onChange={ handleChange }
         />
         <TextField
           type="password"
@@ -54,12 +40,12 @@ export default function Login() {
           autoComplete="password"
           label="Password"
           variant="outlined"
-          onChange={ ({ target: { value } }) => setPassword(value) }
+          onChange={ handleChange }
         />
         <Button
           type="submit"
           data-testid="login-submit-btn"
-          disabled={ formCheck }
+          disabled={ isLoginDisabled }
           variant="contained"
         >
           Enter
