@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { Backdrop, CircularProgress } from '@mui/material';
 import React from 'react';
 
-export default function LoadingCircular({ open }) {
+export default function LoadingCircular({ open = true }) {
   return (
     <Backdrop
       sx={ { color: '#fff' } }

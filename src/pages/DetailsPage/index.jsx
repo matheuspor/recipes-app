@@ -167,5 +167,9 @@ DetailsPage.propTypes = {
     strDrinkThumb: PropTypes.string,
     strDrink: PropTypes.string,
     strCategory: PropTypes.string,
-  }).isRequired,
+  }),
+};
+
+DetailsPage.defaultProps = {
+  meal: undefined,
 };

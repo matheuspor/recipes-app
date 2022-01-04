@@ -5,19 +5,28 @@ import { useLocation } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Index';
 import LoadingCircular from '../../components/LoadingCircular';
-import { fetchAllMeals, fetchFoodsCountries } from '../../services/apiHelpers';
+import apiHelpers from '../../services/apiHelpers';
 import ExploreByArea from '../ExploreByArea';
 import FilterButtons from './FilterButtons';
 import RecipeCard from './RecipeCard';
 
 export default function Recipes() {
   const { pathname } = useLocation();
-  const { isFetching, data: meals } = useQuery(['meals', pathname],
-    () => fetchAllMeals(pathname));
-  const { data: categories } = useQuery('categories', () => fetchFoodsCountries());
-  if (isFetching) {
+  const { fetchAllMeals, fetchFoodsCountries } = apiHelpers;
+
+  const { isLoading: isFetchingMeals, data: meals } = useQuery(
+    ['meals', pathname], () => fetchAllMeals(pathname),
+  );
+
+  const { isLoading: isFetchingCategories, data: categories } = useQuery(
+    'categories', () => fetchFoodsCountries(),
+  );
+
+  const isBothLoading = isFetchingMeals || isFetchingCategories;
+
+  if (isBothLoading) {
     return (
-      <LoadingCircular open={ isFetching } />
+      <LoadingCircular open={ isBothLoading } />
     );
   }
   return (
@@ -27,7 +36,7 @@ export default function Recipes() {
       sx={ { my: 2 } }
     >
       <Header />
-      {(pathname.includes('explore') && categories)
+      {pathname.includes('explore')
         ? (
           <ExploreByArea categories={ categories } />
         )
