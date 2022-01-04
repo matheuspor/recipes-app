@@ -37,6 +37,8 @@ export default function DetailsPage() {
     return ingredientsCount;
   });
 
+  const splitInstructions = meal.strInstructions.split('.');
+
   const today = new Date();
   const date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
   const checkFavorite = favoriteRecipes.some((recipe) => (
@@ -114,9 +116,16 @@ export default function DetailsPage() {
               mb: 2,
               backgroundColor: '#CDCDCD' } }
           >
-            <Typography variant="body1" sx={ { ml: 1 } }>
-              {meal.strInstructions}
-            </Typography>
+            {splitInstructions.map((instruction, index) => (
+              instruction && (
+                <Typography
+                  key={ index }
+                  variant="body1"
+                  sx={ { ml: 1 } }
+                >
+                  {`${instruction}.`}
+                </Typography>
+              ))) }
           </Paper>
           {meal.strYoutube
             && (
