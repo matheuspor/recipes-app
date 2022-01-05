@@ -37,7 +37,7 @@ export default function DetailsPage() {
     return ingredientsCount;
   });
 
-  const splitInstructions = meal.strInstructions.split('.');
+  const splitInstructions = () => meal && meal.strInstructions.split('.');
 
   const today = new Date();
   const date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
@@ -116,7 +116,7 @@ export default function DetailsPage() {
               mb: 2,
               backgroundColor: '#CDCDCD' } }
           >
-            {splitInstructions.map((instruction, index) => (
+            {splitInstructions().map((instruction, index) => (
               instruction && (
                 <Typography
                   key={ index }
