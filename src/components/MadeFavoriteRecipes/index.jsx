@@ -14,30 +14,31 @@ export default function MadeFavoriteRecipesCard({ meal }) {
   const { setFavoriteRecipes, favoriteRecipes } = useContext(context);
   return (
     <Card sx={ { my: 2 } }>
-      <CardActionArea
-        onClick={ () => navigate(meal.idMeal
-          ? `/recipes-app/foods/${meal.idMeal}`
-          : `/recipes-app/drinks/${meal.idDrink}`,
-        { state: meal }) }
-      >
-        <Grid container>
-          <Grid item xs={ 4 }>
+      <Grid container>
+        <Grid item xs={ 4 }>
+          <CardActionArea
+            onClick={ () => navigate(meal.idMeal
+              ? `/recipes-app/foods/${meal.idMeal}`
+              : `/recipes-app/drinks/${meal.idDrink}`,
+            { state: meal }) }
+          >
             <CardMedia
               height="200"
               component="img"
               image={ meal.strMealThumb || meal.strDrinkThumb }
               alt="meal photo"
             />
-          </Grid>
-          <Grid item xs={ 8 }>
-            <CardContent>
-              <Grid container>
-                <Typography variant="body2" color="text.secondary">
-                  {meal.strArea ? `${meal.strArea} - ${meal.strCategory}`
-                    : meal.strCategory}
-                </Typography>
-                <Grid item sx={ { ml: 'auto', mt: -2 } }>
-                  {location.includes('favorite')
+          </CardActionArea>
+        </Grid>
+        <Grid item xs={ 8 }>
+          <CardContent>
+            <Grid container>
+              <Typography variant="body2" color="text.secondary">
+                {meal.strArea ? `${meal.strArea} - ${meal.strCategory}`
+                  : meal.strCategory}
+              </Typography>
+              <Grid item sx={ { ml: 'auto', mt: -2 } }>
+                {location.includes('favorite')
                 && (
                   <IconButton
                     onClick={ () => {
@@ -51,23 +52,22 @@ export default function MadeFavoriteRecipesCard({ meal }) {
                     <Favorite sx={ { fontSize: 30 } } />
                   </IconButton>
                 )}
-                </Grid>
               </Grid>
-              <Typography variant="h6">
-                {meal.strMeal || meal.strDrink}
+            </Grid>
+            <Typography variant="h6">
+              {meal.strMeal || meal.strDrink}
+            </Typography>
+            {location.includes('made-recipes') && (
+              <Typography variant="body2">
+                {`Made in ${meal.madeIn}`}
               </Typography>
-              {location.includes('made-recipes') && (
-                <Typography variant="body2">
-                  {`Made in ${meal.madeIn}`}
-                </Typography>
-              )}
-              {tagsArray && tagsArray.map((tag, index) => (
-                <Chip sx={ { mr: 1, mt: 1 } } label={ tag } key={ index } />
-              ))}
-            </CardContent>
-          </Grid>
+            )}
+            {tagsArray && tagsArray.map((tag, index) => (
+              <Chip sx={ { mr: 1, mt: 1 } } label={ tag } key={ index } />
+            ))}
+          </CardContent>
         </Grid>
-      </CardActionArea>
+      </Grid>
     </Card>
   );
 }

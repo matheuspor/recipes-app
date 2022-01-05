@@ -40,8 +40,8 @@ export default function MadeFavoriteRecipes() {
             variant="contained"
             onClick={ () => {
               const justFoods = recipesBasedOnLocation
-                .filter((recipe) => Object.keys(recipe)
-                  .find((key) => key === 'strMeal'));
+                .filter((recipe) => Object.prototype.hasOwnProperty
+                  .call(recipe, 'strMeal'));
               setRecipes(justFoods);
             } }
           >
@@ -54,8 +54,8 @@ export default function MadeFavoriteRecipes() {
             variant="contained"
             onClick={ () => {
               const justDrinks = recipesBasedOnLocation
-                .filter((recipe) => Object.keys(recipe)
-                  .find((key) => key === 'strDrink'));
+                .filter((recipe) => Object.prototype.hasOwnProperty
+                  .call(recipe, 'strDrink'));
               setRecipes(justDrinks);
             } }
           >
