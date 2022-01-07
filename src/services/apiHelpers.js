@@ -33,6 +33,16 @@ export default {
   fetchFoodsCountries: (() => fetch(FOODS_COUNTRIES)
     .then((response) => response.json())
     .then((data) => data.meals)),
+  fetchMealById: (id, location) => {
+    if (location.includes('foods')) {
+      return fetch(`${FOOD_BY_ID}${id}`)
+        .then((response) => response.json())
+        .then(({ meals }) => meals[0]);
+    }
+    return fetch(`${DRINK_BY_ID}${id}`)
+      .then((response) => response.json())
+      .then(({ drinks }) => drinks[0]);
+  },
 };
 
 export const fetchMealsByCategories = (category = '', location) => (
@@ -49,24 +59,6 @@ export const searchAndFetchMeals = (name = '', category = '', location) => {
   return location.includes('/foods')
     ? fetcher(`${FOODS_BY_NAME}${name}`)
     : fetcher(`${DRINKS_BY_NAME}${name}`);
-};
-
-// export const fetchAllMeals = (location) => {
-//   if (location.includes('/foods')) {
-//     return fetcher(FOODS_BY_NAME);
-//   }
-//   return fetcher(DRINKS_BY_NAME);
-// };
-
-export const fetchMealById = (id, location) => {
-  if (location.includes('foods')) {
-    return fetch(`${FOOD_BY_ID}${id}`)
-      .then((response) => response.json())
-      .then(({ meals }) => meals[0]);
-  }
-  return fetch(`${DRINK_BY_ID}${id}`)
-    .then((response) => response.json())
-    .then(({ drinks }) => drinks[0]);
 };
 
 export const fetchRandomMeal = (location) => {

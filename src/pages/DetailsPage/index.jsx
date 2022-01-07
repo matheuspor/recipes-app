@@ -1,55 +1,22 @@
-/* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable react/jsx-max-depth */
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { Button, Card, CardActionArea, CardContent,
   CardMedia, Container, Grid, IconButton, Paper, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
-import React, { useContext, useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React from 'react';
 import Footer from '../../components/Footer';
 import LoadingCircular from '../../components/LoadingCircular';
-import context from '../../context/context';
-import { fetchMealById } from '../../services/apiHelpers';
+import useDetailsHelper from './helper';
 
 export default function DetailsPage() {
-  const location = useLocation();
-  const [isFavorite, setIsFavorite] = useState(false);
-  const { state } = location;
-  const navigate = useNavigate();
-  const { setMadeRecipes, madeRecipes, setFavoriteRecipes, favoriteRecipes,
-  } = useContext(context);
-
-  const checkIfMealAlreadyMade = (mealId) => (madeRecipes
-    .some((recipe) => (recipe.idMeal
-      ? recipe.idMeal === mealId
-      : recipe.idDrink === mealId)));
-
-  const { isFetching, data: meal } = useQuery('meal',
-    () => fetchMealById((state.idMeal || state.idDrink), location.pathname));
-  const countIngredients = (() => {
-    const ingredientsCount = [];
-    let count = 1;
-    while (meal[`strIngredient${count}`]) {
-      ingredientsCount.push(count);
-      count += 1;
-    }
-    return ingredientsCount;
-  });
-
-  const splitInstructions = () => meal && meal.strInstructions.split('.');
-
-  const today = new Date();
-  const date = `${today.getDate()}/${today.getMonth() + 1}/${today.getFullYear()}`;
-  const checkFavorite = favoriteRecipes.some((recipe) => (
-    recipe.idMeal
-      ? recipe.idMeal === meal.idMeal
-      : recipe.idDrink === meal.idDrink));
-
-  useEffect(() => {
-    if (checkFavorite) setIsFavorite(true);
-    else setIsFavorite(false);
-  }, [favoriteRecipes, meal, checkFavorite]);
+  const { isFetching,
+    meal,
+    ingredientsCount,
+    treatedInstructions,
+    isFavorite,
+    clickedFavorite,
+    clickedMakeRecipe,
+  } = useDetailsHelper();
 
   if (isFetching) {
     return <LoadingCircular open={ isFetching } />;
@@ -75,13 +42,7 @@ export default function DetailsPage() {
             </Typography>
             <Grid item sx={ { ml: 'auto' } }>
               <IconButton
-                onClick={ () => {
-                  if (checkFavorite) {
-                    const removeFavorite = favoriteRecipes
-                      .filter((recipe) => recipe.idMeal !== meal.idMeal);
-                    setFavoriteRecipes(removeFavorite);
-                  } else setFavoriteRecipes([...favoriteRecipes, meal]);
-                } }
+                onClick={ clickedFavorite }
               >
                 {isFavorite
                   ? <Favorite sx={ { fontSize: 30 } } />
@@ -101,7 +62,7 @@ export default function DetailsPage() {
               mb: 2,
               backgroundColor: '#CDCDCD' } }
           >
-            {countIngredients().map((count) => (
+            {ingredientsCount.map((count) => (
               <Typography key={ count } variant="body1" sx={ { ml: 1 } }>
                 {`- ${meal[`strIngredient${count}`]} - ${meal[`strMeasure${count}`]}`}
               </Typography>
@@ -116,7 +77,7 @@ export default function DetailsPage() {
               mb: 2,
               backgroundColor: '#CDCDCD' } }
           >
-            {splitInstructions().map((instruction, index) => (
+            {treatedInstructions.map((instruction, index) => (
               instruction && (
                 <Typography
                   key={ index }
@@ -152,13 +113,7 @@ export default function DetailsPage() {
           <Button
             variant="contained"
             sx={ { margin: '0 auto', display: 'flex' } }
-            onClick={ () => {
-              if (!checkIfMealAlreadyMade(meal.idMeal || meal.idDrink)) {
-                const mealWithDate = { ...meal, madeIn: date };
-                setMadeRecipes([...madeRecipes, mealWithDate]);
-              }
-              navigate('/recipes-app/made-recipes');
-            } }
+            onClick={ clickedMakeRecipe }
           >
             Make Recipe
           </Button>
