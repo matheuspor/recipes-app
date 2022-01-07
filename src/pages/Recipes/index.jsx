@@ -19,7 +19,7 @@ export default function Recipes() {
   return (
     <Container
       component="main"
-      maxWidth="xs"
+      maxWidth="sm"
       sx={ { my: 2 } }
     >
       <Header />
