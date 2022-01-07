@@ -6,7 +6,7 @@ import DetailsPage from '../pages/DetailsPage';
 import Explore from '../pages/Explore';
 import ExploreFoodsDrinks from '../pages/ExploreFoodsDrinks';
 import ExploreByIngredients from '../pages/ExploreByIngredients';
-import MadeFavoriteRecipes from '../pages/MadeRecipes';
+import MadeFavoriteRecipes from '../pages/MadeFavoriteRecipes';
 import Profile from '../pages/Profile';
 
 const CommonRoutes = () => (

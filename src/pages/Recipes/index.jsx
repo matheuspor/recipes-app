@@ -1,32 +1,20 @@
 import { Container, Grid, Typography } from '@mui/material';
 import React from 'react';
-import { useQuery } from 'react-query';
-import { useLocation } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Index';
 import LoadingCircular from '../../components/LoadingCircular';
-import apiHelpers from '../../services/apiHelpers';
 import ExploreByArea from '../ExploreByArea';
 import FilterButtons from './FilterButtons';
+import useRecipesHelper from './helper';
 import RecipeCard from './RecipeCard';
 
 export default function Recipes() {
-  const { pathname } = useLocation();
-  const { fetchAllMeals, fetchFoodsCountries } = apiHelpers;
+  const { pathname, isAnyLoading, meals, categories } = useRecipesHelper();
+  console.log(meals);
 
-  const { isLoading: isFetchingMeals, data: meals } = useQuery(
-    ['meals', pathname], () => fetchAllMeals(pathname),
-  );
-
-  const { isLoading: isFetchingCategories, data: categories } = useQuery(
-    'categories', () => fetchFoodsCountries(),
-  );
-
-  const isBothLoading = isFetchingMeals || isFetchingCategories;
-
-  if (isBothLoading) {
+  if (isAnyLoading) {
     return (
-      <LoadingCircular open={ isBothLoading } />
+      <LoadingCircular open={ isAnyLoading } />
     );
   }
   return (

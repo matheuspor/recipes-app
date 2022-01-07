@@ -58,7 +58,7 @@ export default function DetailsPage() {
   return (
     <Container
       component="main"
-      maxWidth="xs"
+      maxWidth="sm"
       sx={ { my: 4 } }
     >
       <Card sx={ { maxWidth: 600 } } spacing={ 2 }>
@@ -143,6 +143,7 @@ export default function DetailsPage() {
                     <CardMedia
                       component="iframe"
                       image={ meal.strYoutube.replace('watch?v=', 'embed/') }
+                      sx={ { height: '400px' } }
                     />
                   </CardActionArea>
                 </Paper>

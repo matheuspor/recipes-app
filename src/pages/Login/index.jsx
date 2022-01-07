@@ -3,11 +3,7 @@ import React from 'react';
 import useLoginHelper from './helper';
 
 export default function Login() {
-  const {
-    isLoginDisabled,
-    handleChange,
-    handleSubmit,
-  } = useLoginHelper();
+  const { isLoginDisabled, handleChange, handleSubmit } = useLoginHelper();
 
   return (
     <Container

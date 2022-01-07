@@ -1,4 +1,4 @@
-import { Button, Container, Grid } from '@mui/material';
+import { Button, Container, Grid, Typography } from '@mui/material';
 import React, { useContext, useState, useEffect } from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Index';
@@ -22,7 +22,7 @@ export default function MadeFavoriteRecipes() {
       maxWidth="xs"
     >
       <Header />
-      <Grid container spacing={ 2 } sx={ { justifyContent: 'space-evenly' } }>
+      <Grid container spacing={ 2 } sx={ { justifyContent: 'space-evenly', mb: 2 } }>
         <Grid item>
           <Button
             sx={ { mt: 2 } }
@@ -63,8 +63,10 @@ export default function MadeFavoriteRecipes() {
           </Button>
         </Grid>
       </Grid>
-      {recipes && recipes.map((meal) => (
-        <MadeFavoriteRecipesCard key={ meal.idMeal } meal={ meal } />))}
+      {recipes && recipes.length > 0
+        ? recipes.map((meal) => (
+          <MadeFavoriteRecipesCard key={ meal.idMeal } meal={ meal } />))
+        : <Typography align="center" variant="h6">No recipes found...</Typography>}
       <Footer />
     </Container>
   );
