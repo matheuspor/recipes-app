@@ -2,7 +2,7 @@ import { Button, Container, Grid, Typography } from '@mui/material';
 import React, { useContext, useState, useEffect } from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Index';
-import MadeFavoriteRecipesCard from '../../components/MadeFavoriteRecipes';
+import MadeFavoriteRecipesCard from '../../components/MadeFavoriteRecipesCard';
 import context from '../../context/context';
 
 export default function MadeFavoriteRecipes() {
