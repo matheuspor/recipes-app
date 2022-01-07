@@ -14,7 +14,7 @@ test('Tests Header title on MealsPage', async () => {
 });
 
 test('Renders Meals page and test MealCards', async () => {
-  renderWithRouter(<Recipes />);
+  renderWithRouter(<Recipes />, { route: '/recipes-app/meals' });
   await waitFor(() => {
     Array(MEALS_NUMBER).fill(0).forEach((arr, index) => {
       expect(screen.getByTestId(`${index}-recipe-card`)).toBeInTheDocument();

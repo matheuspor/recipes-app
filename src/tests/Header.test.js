@@ -11,7 +11,7 @@ const datatestIds = {
 };
 
 test('Renders Header component', async () => {
-  renderWithRouter(<Header />);
+  renderWithRouter(<Header />, { route: '/recipes-app/foods' });
   await waitFor(() => {
     const profileIcon = screen.getByTestId(datatestIds.profileIcon);
     const pageTitle = screen.getByTestId(datatestIds.pageTitle);
@@ -22,7 +22,7 @@ test('Renders Header component', async () => {
   });
 });
 test('Tests profileIcon redirection', async () => {
-  renderWithRouter(<Header />);
+  renderWithRouter(<Header />, { route: '/recipes-app/foods' });
 
   const profileIcon = screen.getByTestId(datatestIds.profileIcon);
   userEvent.click(profileIcon);
