@@ -10,6 +10,7 @@ import RecipeCard from './RecipeCard';
 
 export default function Recipes() {
   const { pathname, isAnyLoading, meals, categories } = useRecipesHelper();
+  console.log(meals);
 
   if (isAnyLoading) {
     return (
@@ -39,14 +40,13 @@ export default function Recipes() {
       >
         {meals ? meals.map((meal, index) => (
           <Grid
-            data-testid={ `${index}-recipe-card` }
             item
             xs={ 2 }
             sm={ 4 }
             md={ 4 }
             key={ `${index}-${meal.idMeal}` }
           >
-            <RecipeCard meal={ meal } />
+            <RecipeCard dataTestid={ `${index}-recipe-card` } meal={ meal } />
           </Grid>
         )) : (
           <Typography

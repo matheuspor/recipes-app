@@ -17,6 +17,7 @@ export default function Footer() {
           <IconButton
             size="large"
             color="inherit"
+            data-testid="drinks-icon-btn"
             onClick={ () => navigate('/recipes-app/drinks') }
           >
             <LocalBar sx={ { width: 35, height: 35 } } />
@@ -25,7 +26,7 @@ export default function Footer() {
             size="large"
             color="inherit"
             onClick={ () => navigate('/recipes-app/explore') }
-            data-testid="profile-top-btn"
+            data-testid="explore-icon-btn"
             sx={ { mx: 8 } }
           >
             <Explore sx={ { width: 35, height: 35 } } />
@@ -33,7 +34,7 @@ export default function Footer() {
           <IconButton
             size="large"
             color="inherit"
-            data-testid="search-top-btn"
+            data-testid="foods-icon-btn"
             onClick={ () => navigate('/recipes-app/foods') }
           >
             <RestaurantMenu sx={ { width: 35, height: 35 } } />

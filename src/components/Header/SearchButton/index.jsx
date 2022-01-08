@@ -12,11 +12,6 @@ export default function SearchButton({ openPopover, closePopover }) {
   return (
     <Menu
       component="form"
-      onSubmit={ async (event) => {
-        event.preventDefault();
-        client.fetchQuery(['meals', location],
-          () => searchAndFetchMeals(name, category, location));
-      } }
       open={ openPopover }
       onClose={ closePopover }
       anchorOrigin={ {
@@ -24,22 +19,27 @@ export default function SearchButton({ openPopover, closePopover }) {
       } }
       sx={ { mt: 3 } }
     >
-      <MenuItem sx={ { p: 2 } }>
-        <TextField
-          inputRef={ (input) => input && input.focus() }
-          type="text"
-          label="Search Recipe"
-          variant="filled"
-          onChange={ ({ target }) => setName(target.value) }
-        />
-        <Button
-          color="primary"
-          sx={ { ml: 2 } }
-          type="submit"
-        >
-          Search
-        </Button>
-      </MenuItem>
+      <TextField
+        inputRef={ (input) => input && input.focus() }
+        inputProps={ { 'data-testid': 'search-input' } }
+        type="text"
+        label="Search Recipe"
+        variant="filled"
+        onChange={ ({ target }) => setName(target.value) }
+      />
+      <Button
+        data-testid="submit-search-btn"
+        onClick={ async (event) => {
+          event.preventDefault();
+          client.fetchQuery(['meals', location],
+            () => searchAndFetchMeals(name, category, location));
+        } }
+        color="primary"
+        sx={ { ml: 2 } }
+        type="submit"
+      >
+        Search
+      </Button>
       <MenuItem sx={ { p: 2 } }>
         <RadioGroup
           row

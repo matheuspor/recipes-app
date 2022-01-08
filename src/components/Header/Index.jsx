@@ -54,7 +54,7 @@ export default function Header() {
           <IconButton
             size="large"
             color="inherit"
-            data-testid="search-top-btn"
+            data-testid="search-recipe-btn"
             onClick={ () => setOpenPopover(!openPopover) }
           >
             <Search sx={ { width: 35, height: 35 } } />

@@ -7,7 +7,7 @@ import Header from '../components/Header/Index';
 const datatestIds = {
   profileIcon: 'profile-top-btn',
   pageTitle: 'page-title',
-  searchIcon: 'search-top-btn',
+  searchIcon: 'search-recipe-btn',
 };
 
 test('Renders Header component', async () => {

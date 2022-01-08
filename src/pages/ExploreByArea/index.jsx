@@ -19,6 +19,7 @@ export default function ExploreByArea({ categories }) {
       <FormControl sx={ { minWidth: 120 } }>
         <InputLabel>Country</InputLabel>
         <Select
+          data-testid="country-area-select"
           defaultValue=""
           label="Country"
           onChange={ ({ target }) => {

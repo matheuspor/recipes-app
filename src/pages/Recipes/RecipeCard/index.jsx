@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const RecipeCard = ({ meal }) => {
+const RecipeCard = ({ meal, dataTestid }) => {
   const navigate = useNavigate();
   return (
     <Card sx={ { mt: 2 } }>
@@ -14,6 +14,7 @@ const RecipeCard = ({ meal }) => {
         { state: meal }) }
       >
         <CardMedia
+          data-testid={ dataTestid }
           component="img"
           image={ meal.strMealThumb || meal.strDrinkThumb }
           alt="meal photo"
@@ -32,6 +33,7 @@ const RecipeCard = ({ meal }) => {
 };
 
 RecipeCard.propTypes = {
+  dataTestid: PropTypes.string.isRequired,
   meal: PropTypes.shape({
     strMeal: PropTypes.string,
     strMealThumb: PropTypes.string,

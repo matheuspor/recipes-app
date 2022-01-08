@@ -45,6 +45,7 @@ const FilterButtons = () => {
           md={ 4 }
         >
           <Button
+            data-testid={ `${index}-filter-btn` }
             value={ category }
             onClick={ handleClick }
             variant="contained"
