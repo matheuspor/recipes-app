@@ -12,8 +12,10 @@ import client from '../../services/reactQueryClient';
 export default function ExploreByIngredients() {
   const navigate = useNavigate();
   const location = window.location.pathname;
+
   const redirectLocation = location.includes('foods')
     ? '/recipes-app/foods' : '/recipes-app/drinks';
+
   const { isFetching, data: ingredients } = useQuery(
     ['ingredients', location], () => fetchIngredients(location),
   );

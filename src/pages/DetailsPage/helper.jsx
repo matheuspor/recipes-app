@@ -63,8 +63,8 @@ const useDetailsHelper = () => {
   };
 
   useEffect(() => {
-    checkFavorite(meal, favoriteRecipes, setIsFavorite);
     if (meal) {
+      checkFavorite(meal, favoriteRecipes, setIsFavorite);
       setTreatedInstructions(splitInstructions(meal));
       setIngredientsCount(countIngredients(meal));
     }
