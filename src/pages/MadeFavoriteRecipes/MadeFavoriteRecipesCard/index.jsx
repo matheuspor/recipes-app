@@ -5,7 +5,7 @@ import { Card, CardActionArea, CardContent,
   CardMedia, Chip, Grid, IconButton, Typography } from '@mui/material';
 import { Favorite } from '@mui/icons-material';
 import { useNavigate } from 'react-router-dom';
-import context from '../../context/context';
+import context from '../../../context/context';
 
 export default function MadeFavoriteRecipesCard({ meal }) {
   const location = window.location.pathname;

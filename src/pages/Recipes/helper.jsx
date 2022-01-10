@@ -1,11 +1,9 @@
 import { useQuery } from 'react-query';
-// import { useLocation } from 'react-router-dom';
 import apiHelpers from '../../services/apiHelpers';
 
 const useRecipesHelper = () => {
   const { pathname } = window.location;
 
-  // const { pathname } = useLocation();
   const { fetchAllMeals, fetchFoodsCountries } = apiHelpers;
 
   const { isFetching: isFetchingMeals, data: meals } = useQuery(

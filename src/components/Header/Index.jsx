@@ -5,23 +5,25 @@ import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import SearchButton from './SearchButton';
 
+const treatLocation = (pathname) => {
+  const PATHNAME_LENGTH = 3;
+  const untreatedLocation = pathname.split('/');
+  if (untreatedLocation.length > PATHNAME_LENGTH) {
+    return `${untreatedLocation[2]} ${untreatedLocation[3]}`;
+  }
+  if (untreatedLocation[2].includes('made')
+  || untreatedLocation[2].includes('favorite')) {
+    return untreatedLocation[2].replace('-', ' ');
+  }
+  return untreatedLocation[2];
+};
+
 export default function Header() {
   const [openPopover, setOpenPopover] = useState(false);
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const treatedLocation = treatLocation(pathname);
 
-  const treatedLocation = () => {
-    const PATHNAME_LENGTH = 3;
-    const untreatedLocation = pathname.split('/');
-    if (untreatedLocation.length > PATHNAME_LENGTH) {
-      return `${untreatedLocation[2]} ${untreatedLocation[3]}`;
-    }
-    if (untreatedLocation[2].includes('made')
-    || untreatedLocation[2].includes('favorite')) {
-      return untreatedLocation[2].replace('-', ' ');
-    }
-    return untreatedLocation[2];
-  };
   return (
     <>
       <AppBar
@@ -49,7 +51,7 @@ export default function Header() {
             component="div"
             sx={ { textTransform: 'capitalize', mx: 6 } }
           >
-            {pathname.includes('area') ? 'Explore Origin' : treatedLocation()}
+            {pathname.includes('area') ? 'Explore Origin' : treatedLocation}
           </Typography>
           <IconButton
             size="large"

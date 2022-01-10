@@ -2,8 +2,8 @@ import { Button, Container, Grid, Typography } from '@mui/material';
 import React, { useContext, useState, useEffect } from 'react';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Index';
-import MadeFavoriteRecipesCard from '../../components/MadeFavoriteRecipesCard';
 import context from '../../context/context';
+import MadeFavoriteRecipesCard from './MadeFavoriteRecipesCard';
 
 export default function MadeFavoriteRecipes() {
   const location = window.location.pathname;

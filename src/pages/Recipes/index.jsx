@@ -10,7 +10,6 @@ import RecipeCard from './RecipeCard';
 
 export default function Recipes() {
   const { pathname, isAnyLoading, meals, categories } = useRecipesHelper();
-  console.log(meals);
 
   if (isAnyLoading) {
     return (
