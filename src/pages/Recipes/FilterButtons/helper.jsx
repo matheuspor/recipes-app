@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { fetchMealsByCategories, fetchRandomMeal } from '../../../services/apiHelpers';
 import client from '../../../services/reactQueryClient';
@@ -8,14 +7,9 @@ const drinksCategories = ['Random', 'Beer', 'Cocktail', 'Cocoa', 'Shot', 'Other/
 
 const useFilterButtonsHelper = () => {
   const location = window.location.pathname;
-  const [categories, setCategories] = useState([]);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (location.includes('/foods')) {
-      setCategories([...foodsCategories]);
-    } else setCategories([...drinksCategories]);
-  }, [location]);
+  const categoriesByLocation = location.includes('/foods')
+    ? foodsCategories : drinksCategories;
 
   const handleClick = async ({ target: { value } }) => {
     if (value !== 'Random') {
@@ -30,7 +24,7 @@ const useFilterButtonsHelper = () => {
   };
 
   return {
-    categories,
+    categories: categoriesByLocation,
     handleClick,
   };
 };

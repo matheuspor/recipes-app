@@ -4,11 +4,13 @@ import { Button, Card, CardActionArea, CardContent,
   CardMedia, Container, Grid, IconButton, Paper, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import React from 'react';
+import { useParams } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import LoadingCircular from '../../components/LoadingCircular';
 import useDetailsHelper from './helper';
 
 export default function DetailsPage() {
+  const { id } = useParams();
   const { isFetching,
     meal,
     ingredientsCount,
@@ -16,7 +18,7 @@ export default function DetailsPage() {
     isFavorite,
     clickedFavorite,
     clickedMakeRecipe,
-  } = useDetailsHelper();
+  } = useDetailsHelper(id);
 
   if (isFetching) {
     return <LoadingCircular open={ isFetching } />;

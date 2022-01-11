@@ -10,8 +10,7 @@ const RecipeCard = ({ meal, dataTestid }) => {
       <CardActionArea
         onClick={ () => navigate(meal.idMeal
           ? `/recipes-app/foods/${meal.idMeal}`
-          : `/recipes-app/drinks/${meal.idDrink}`,
-        { state: meal }) }
+          : `/recipes-app/drinks/${meal.idDrink}`) }
       >
         <CardMedia
           data-testid={ dataTestid }

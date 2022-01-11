@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-max-depth */
 import PropTypes from 'prop-types';
 import React, { useContext } from 'react';
 import { Card, CardActionArea, CardContent,
@@ -12,6 +11,46 @@ export default function MadeFavoriteRecipesCard({ meal }) {
   const navigate = useNavigate();
   const tagsArray = meal.strTags && meal.strTags.split(',');
   const { setFavoriteRecipes, favoriteRecipes } = useContext(context);
+
+  const cardTextContent = () => (
+    <Grid item xs={ 8 }>
+      <CardContent>
+        <Grid container>
+          <Typography variant="body2" color="text.secondary">
+            {meal.strArea ? `${meal.strArea} - ${meal.strCategory}`
+              : meal.strCategory}
+          </Typography>
+          <Grid item sx={ { ml: 'auto', mt: -2 } }>
+            {location.includes('favorite')
+                && (
+                  <IconButton
+                    onClick={ () => {
+                      const filteredRecipes = favoriteRecipes.filter((recipe) => (
+                        recipe.idMeal
+                          ? recipe.idMeal !== meal.idMeal
+                          : recipe.idDrink !== meal.idDrink));
+                      setFavoriteRecipes(filteredRecipes);
+                    } }
+                  >
+                    <Favorite sx={ { fontSize: 30 } } />
+                  </IconButton>
+                )}
+          </Grid>
+        </Grid>
+        <Typography variant="h6">
+          {meal.strMeal || meal.strDrink}
+        </Typography>
+        {location.includes('made-recipes') && (
+          <Typography variant="body2">
+            {`Made in ${meal.madeIn}`}
+          </Typography>
+        )}
+        {tagsArray && tagsArray.map((tag, index) => (
+          <Chip sx={ { mr: 1, mt: 1 } } label={ tag } key={ index } />
+        ))}
+      </CardContent>
+    </Grid>
+  );
   return (
     <Card sx={ { my: 2 } }>
       <Grid container>
@@ -30,43 +69,7 @@ export default function MadeFavoriteRecipesCard({ meal }) {
             />
           </CardActionArea>
         </Grid>
-        <Grid item xs={ 8 }>
-          <CardContent>
-            <Grid container>
-              <Typography variant="body2" color="text.secondary">
-                {meal.strArea ? `${meal.strArea} - ${meal.strCategory}`
-                  : meal.strCategory}
-              </Typography>
-              <Grid item sx={ { ml: 'auto', mt: -2 } }>
-                {location.includes('favorite')
-                && (
-                  <IconButton
-                    onClick={ () => {
-                      const filteredRecipes = favoriteRecipes.filter((recipe) => (
-                        recipe.idMeal
-                          ? recipe.idMeal !== meal.idMeal
-                          : recipe.idDrink !== meal.idDrink));
-                      setFavoriteRecipes(filteredRecipes);
-                    } }
-                  >
-                    <Favorite sx={ { fontSize: 30 } } />
-                  </IconButton>
-                )}
-              </Grid>
-            </Grid>
-            <Typography variant="h6">
-              {meal.strMeal || meal.strDrink}
-            </Typography>
-            {location.includes('made-recipes') && (
-              <Typography variant="body2">
-                {`Made in ${meal.madeIn}`}
-              </Typography>
-            )}
-            {tagsArray && tagsArray.map((tag, index) => (
-              <Chip sx={ { mr: 1, mt: 1 } } label={ tag } key={ index } />
-            ))}
-          </CardContent>
-        </Grid>
+        {cardTextContent()}
       </Grid>
     </Card>
   );
