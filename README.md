@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Recipes App
+Front-end webApp built with ReactJS using React-Query and ContextApi for state management.
+- Fully responsive layout using Material-UI component library.
+- Recipes are grabbed from the [MealDB](https://www.themealdb.com/) and the [CocktailsDB](https://www.thecocktaildb.com/) external APIs. 
+- Users can search/filter recipes and add to favorites.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Live Demo
+[Recipes App Live Demo](https://matheuspor.github.io/recipes-app/).
 
 ## Available Scripts
 
