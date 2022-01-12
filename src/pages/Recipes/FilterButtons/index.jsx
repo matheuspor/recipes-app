@@ -20,6 +20,7 @@ const FilterButtons = () => {
           md={ 4 }
         >
           <Button
+            sx={ { fontWeight: 'bold' } }
             data-testid={ `${index}-filter-btn` }
             value={ category }
             onClick={ handleClick }
