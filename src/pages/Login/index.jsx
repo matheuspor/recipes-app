@@ -1,4 +1,5 @@
-import { Button, Container, Stack, TextField, Typography } from '@mui/material';
+import { Button, Container, Divider,
+  Link, Stack, TextField, Typography } from '@mui/material';
 import React from 'react';
 import useLoginHelper from './helper';
 
@@ -47,6 +48,18 @@ export default function Login() {
           Enter
         </Button>
       </Stack>
+      <Divider sx={ { mt: 5, mb: 2, borderBottomWidth: 2 } } color="primary" />
+      <Typography
+        variant="body2"
+        color="text.secondary"
+        align="center"
+      >
+        {'© '}
+        <Link color="text.primary" target="_blank" href="https://github.com/matheuspor/recipes-app">
+          matheuspor
+        </Link>
+        {' 2022'}
+      </Typography>
     </Container>
   );
 }

@@ -22,10 +22,9 @@ export default function ExploreByArea({ categories }) {
           data-testid="country-area-select"
           defaultValue=""
           label="Country"
-          onChange={ ({ target }) => {
-            fetchFoodsByArea(target.value)
-              .then((meals) => client.setQueryData(['meals', location], meals));
-          } }
+          onChange={ ({ target }) => (
+            client.fetchQuery(['meals', location],
+              () => fetchFoodsByArea(target.value))) }
         >
           {categories.map((category, index) => (
             <MenuItem key={ index } value={ category.strArea }>
