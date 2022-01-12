@@ -48,7 +48,7 @@ export default function Login() {
           Enter
         </Button>
       </Stack>
-      <Divider sx={ { mt: 5, mb: 2, borderBottomWidth: 2 } } color="primary" />
+      <Divider sx={ { mt: 5, mb: 2, borderBottomWidth: 2, backgroundColor: 'black' } } />
       <Typography
         variant="body2"
         color="text.secondary"
