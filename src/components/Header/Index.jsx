@@ -47,9 +47,9 @@ export default function Header() {
           </IconButton>
           <Typography
             data-testid="page-title"
-            variant="h5"
-            component="div"
-            sx={ { textTransform: 'capitalize', mx: 6 } }
+            sx={ { textTransform: 'capitalize',
+              mx: 6,
+              fontSize: { xs: 18, sm: 'h5.fontSize' } } }
           >
             {pathname.includes('area') ? 'Explore Origin' : treatedLocation}
           </Typography>

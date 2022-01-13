@@ -1,47 +1,49 @@
 import { Explore, LocalBar, RestaurantMenu } from '@mui/icons-material';
-import { AppBar, IconButton,
-  Toolbar } from '@mui/material';
-import React from 'react';
+import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 export default function Footer() {
   const navigate = useNavigate();
+  const [value, setValue] = useState();
+
+  useEffect(() => {
+    const path = window.location.pathname;
+    if (path === '/recipes-app/foods') {
+      setValue(0);
+    } else if (path.includes('explore')) {
+      setValue(1);
+    } else if (path === '/recipes-app/drinks') {
+      setValue(2);
+    } else setValue('');
+  }, []);
   return (
-    <>
-      <AppBar
-        position="fixed"
-        color="primary"
-        sx={ { top: 'auto', bottom: 0 } }
+    <Paper
+      sx={ { position: 'fixed', bottom: 0, left: 0, right: 0 } }
+      elevation={ 3 }
+    >
+      <BottomNavigation
+        value={ value }
+        onChange={ (event, newValue) => {
+          setValue(newValue);
+        } }
       >
-        <Toolbar sx={ { justifyContent: 'center' } }>
-          <IconButton
-            size="large"
-            color="inherit"
-            data-testid="drinks-icon-btn"
-            onClick={ () => navigate('/recipes-app/drinks') }
-          >
-            <LocalBar sx={ { width: 35, height: 35 } } />
-          </IconButton>
-          <IconButton
-            size="large"
-            color="inherit"
-            onClick={ () => navigate('/recipes-app/explore') }
-            data-testid="explore-icon-btn"
-            sx={ { mx: 8 } }
-          >
-            <Explore sx={ { width: 35, height: 35 } } />
-          </IconButton>
-          <IconButton
-            size="large"
-            color="inherit"
-            data-testid="foods-icon-btn"
-            onClick={ () => navigate('/recipes-app/foods') }
-          >
-            <RestaurantMenu sx={ { width: 35, height: 35 } } />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Toolbar />
-    </>
+        <BottomNavigationAction
+          onClick={ () => navigate('/recipes-app/foods') }
+          label="Foods"
+          icon={ <RestaurantMenu /> }
+        />
+        <BottomNavigationAction
+          onClick={ () => navigate('/recipes-app/explore') }
+          label="Explore"
+          icon={ <Explore /> }
+        />
+        <BottomNavigationAction
+          onClick={ () => navigate('/recipes-app/drinks') }
+          label="Drinks"
+          icon={ <LocalBar /> }
+        />
+      </BottomNavigation>
+    </Paper>
   );
 }
