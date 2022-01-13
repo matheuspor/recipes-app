@@ -42,14 +42,14 @@ export default function Header() {
             data-testid="profile-top-btn"
           >
             <AccountCircle
-              sx={ { width: 35, height: 35 } }
+              sx={ { fontSize: 35 } }
             />
           </IconButton>
           <Typography
+            variant="h6"
             data-testid="page-title"
             sx={ { textTransform: 'capitalize',
-              mx: 6,
-              fontSize: { xs: 18, sm: 'h5.fontSize' } } }
+              mx: 6 } }
           >
             {pathname.includes('area') ? 'Explore Origin' : treatedLocation}
           </Typography>
@@ -59,7 +59,7 @@ export default function Header() {
             data-testid="search-recipe-btn"
             onClick={ () => setOpenPopover(!openPopover) }
           >
-            <Search sx={ { width: 35, height: 35 } } />
+            <Search sx={ { fontSize: 35 } } />
           </IconButton>
         </Toolbar>
       </AppBar>
