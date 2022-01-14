@@ -46,7 +46,7 @@ export default function Header() {
             />
           </IconButton>
           <Typography
-            variant="h6"
+            variant={ pathname.includes('explore/') ? 'h7' : 'h6' }
             data-testid="page-title"
             sx={ { textTransform: 'capitalize',
               mx: 6 } }
