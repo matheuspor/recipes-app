@@ -46,10 +46,9 @@ export default function Header() {
             />
           </IconButton>
           <Typography
-            variant={ pathname.includes('explore/') ? 'h7' : 'h6' }
+            variant="h6"
             data-testid="page-title"
-            sx={ { textTransform: 'capitalize',
-              mx: 6 } }
+            sx={ { textTransform: 'capitalize', px: 4 } }
           >
             {pathname.includes('area') ? 'Explore Origin' : treatedLocation}
           </Typography>
