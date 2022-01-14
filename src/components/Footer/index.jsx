@@ -28,6 +28,15 @@ export default function Footer() {
           onChange={ (event, newValue) => {
             setValue(newValue);
           } }
+          sx={ {
+            backgroundColor: 'primary.main',
+            '& .Mui-selected, .Mui-selected > svg': {
+              color: 'background.default',
+            },
+            '& .MuiBottomNavigationAction-root, svg': {
+              color: 'secondary.main',
+            },
+          } }
         >
           <BottomNavigationAction
             onClick={ () => navigate('/recipes-app/foods') }

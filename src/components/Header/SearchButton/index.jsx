@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { Button, FormControlLabel, Menu,
-  MenuItem, Radio, RadioGroup, TextField } from '@mui/material';
+import { Button, FormControlLabel, Grid, Menu,
+  Radio, RadioGroup, TextField } from '@mui/material';
 import client from '../../../services/reactQueryClient';
 import { searchAndFetchMeals } from '../../../services/apiHelpers';
 
@@ -24,7 +24,7 @@ export default function SearchButton({ openPopover, closePopover }) {
       } }
       sx={ { mt: 3 } }
     >
-      <MenuItem sx={ { p: 2 } }>
+      <Grid item display="flex" sx={ { mx: 2, mb: 1 } }>
         <TextField
           inputRef={ (input) => input && input.focus() }
           type="text"
@@ -39,17 +39,25 @@ export default function SearchButton({ openPopover, closePopover }) {
         >
           Search
         </Button>
-      </MenuItem>
-      <MenuItem sx={ { p: 2 } }>
+      </Grid>
+      <Grid item display="flex" sx={ { mx: 2 } }>
         <RadioGroup
           row
           defaultValue="Name"
           onChange={ ({ target: { value } }) => setCategory(value) }
         >
-          <FormControlLabel value="Name" control={ <Radio /> } label="Name" />
-          <FormControlLabel value="Ingredient" control={ <Radio /> } label="Ingredient" />
+          <FormControlLabel
+            value="Name"
+            control={ <Radio /> }
+            label="Name"
+          />
+          <FormControlLabel
+            value="Ingredient"
+            control={ <Radio /> }
+            label="Ingredient"
+          />
         </RadioGroup>
-      </MenuItem>
+      </Grid>
     </Menu>
   );
 }
