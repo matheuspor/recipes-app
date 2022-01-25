@@ -1,30 +1,28 @@
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-import { Button, FormControlLabel, Grid, Menu,
-  Radio, RadioGroup, TextField } from '@mui/material';
+import { Button, FormControlLabel, Grid,
+  Popover, Radio, RadioGroup, TextField } from '@mui/material';
 import client from '../../../services/reactQueryClient';
 import { searchAndFetchMeals } from '../../../services/apiHelpers';
 
-export default function SearchButton({ openPopover, closePopover }) {
+export default function SearchButton({ anchorEl, openPopover, closePopover }) {
   const location = window.location.pathname;
   const [name, setName] = useState('');
   const [category, setCategory] = useState('Name');
   return (
-    <Menu
+    <Popover
       component="form"
       onSubmit={ async (event) => {
         event.preventDefault();
         client.fetchQuery(['meals', location],
           () => searchAndFetchMeals(name, category, location));
       } }
+      anchorEl={ anchorEl }
       open={ openPopover }
       onClose={ closePopover }
-      anchorOrigin={ {
-        horizontal: 'center',
-      } }
       sx={ { mt: 3 } }
     >
-      <Grid item display="flex" sx={ { mx: 2, mb: 1 } }>
+      <Grid item display="flex" sx={ { mx: 2, mt: 2 } }>
         <TextField
           inputRef={ (input) => input && input.focus() }
           type="text"
@@ -40,7 +38,7 @@ export default function SearchButton({ openPopover, closePopover }) {
           Search
         </Button>
       </Grid>
-      <Grid item display="flex" sx={ { mx: 2 } }>
+      <Grid item display="flex" sx={ { mx: 2, my: 1 } }>
         <RadioGroup
           row
           defaultValue="Name"
@@ -58,14 +56,16 @@ export default function SearchButton({ openPopover, closePopover }) {
           />
         </RadioGroup>
       </Grid>
-    </Menu>
+    </Popover>
   );
 }
 
 SearchButton.propTypes = {
   openPopover: PropTypes.bool.isRequired,
   closePopover: PropTypes.func.isRequired,
-  anchorOrigin: PropTypes.shape({
-    horizontal: PropTypes.string,
-  }).isRequired,
+  anchorEl: PropTypes.shape({ current: PropTypes.instanceOf(Element) }),
+};
+
+SearchButton.defaultProps = {
+  anchorEl: null,
 };

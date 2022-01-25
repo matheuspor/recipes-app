@@ -7,6 +7,7 @@ export default function LoadingCircular({ open = true }) {
     <Backdrop
       sx={ { color: '#fff' } }
       open={ open }
+      data-testid="loading-circular"
     >
       <CircularProgress color="inherit" />
     </Backdrop>);

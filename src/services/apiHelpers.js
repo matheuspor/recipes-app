@@ -30,9 +30,11 @@ export default {
     }
     return fetcher(DRINKS_BY_NAME);
   }),
+
   fetchFoodsCountries: (() => fetch(FOODS_COUNTRIES)
     .then((response) => response.json())
     .then((data) => data.meals)),
+
   fetchMealById: (id, location) => {
     if (location.includes('foods')) {
       return fetch(`${FOOD_BY_ID}${id}`)

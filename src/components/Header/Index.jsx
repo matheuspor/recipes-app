@@ -23,6 +23,7 @@ export default function Header() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
   const treatedLocation = treatLocation(pathname);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
   return (
     <>
@@ -33,6 +34,7 @@ export default function Header() {
         <SearchButton
           closePopover={ () => setOpenPopover(!openPopover) }
           openPopover={ openPopover }
+          anchorEl={ anchorEl }
         />
         <Toolbar sx={ { justifyContent: 'center' } }>
           <IconButton
@@ -56,7 +58,10 @@ export default function Header() {
             size="large"
             color="inherit"
             data-testid="search-recipe-btn"
-            onClick={ () => setOpenPopover(!openPopover) }
+            onClick={ (evt) => {
+              setAnchorEl(evt.currentTarget);
+              setOpenPopover(!openPopover);
+            } }
           >
             <Search sx={ { fontSize: 35 } } />
           </IconButton>

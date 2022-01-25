@@ -14,7 +14,7 @@ const useRecipesHelper = (pathname) => {
 
   const isAnyLoading = isFetchingMeals || isFetchingCategories;
 
-  return { pathname, isAnyLoading, meals, categories };
+  return { isAnyLoading, meals, categories };
 };
 
 export default useRecipesHelper;
