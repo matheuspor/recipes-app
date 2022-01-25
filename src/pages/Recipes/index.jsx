@@ -1,5 +1,6 @@
 import { Container, Grid, Typography } from '@mui/material';
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header/Index';
 import LoadingCircular from '../../components/LoadingCircular';
@@ -9,7 +10,8 @@ import useRecipesHelper from './helper';
 import RecipeCard from './RecipeCard';
 
 export default function Recipes() {
-  const { pathname, isAnyLoading, meals, categories } = useRecipesHelper();
+  const { pathname } = useLocation();
+  const { isAnyLoading, meals, categories } = useRecipesHelper(pathname);
 
   if (isAnyLoading) {
     return (

@@ -1,9 +1,7 @@
 import { useQuery } from 'react-query';
 import apiHelpers from '../../services/apiHelpers';
 
-const useRecipesHelper = () => {
-  const { pathname } = window.location;
-
+const useRecipesHelper = (pathname) => {
   const { fetchAllMeals, fetchFoodsCountries } = apiHelpers;
 
   const { isFetching: isFetchingMeals, data: meals } = useQuery(
