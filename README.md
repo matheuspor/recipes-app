@@ -4,14 +4,9 @@ Front-end webApp built with ReactJS using React-Query and ContextApi for state m
 - Recipes are grabbed from the [MealDB](https://www.themealdb.com/) and the [CocktailsDB](https://www.thecocktaildb.com/) external APIs. 
 - Users can search/filter recipes and add to favorites.
 
-## Live Demo
-[Recipes App Live Demo](https://matheuspor.github.io/recipes-app/).
+## [Live Demo](https://matheuspor.github.io/recipes-app/)
 
-## Main Page
-![alt text](./images/Main.jpg)
-
-## Recipe Page
-![alt text](./images/Recipe.jpg)
-
-## Made Recipes
-![alt text](./images/Made.jpg)
+## Usage
+<div align="center">
+    <img src="./.docs/usage-gif.gif">
+</div>
